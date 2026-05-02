@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Send, Mail, MapPin, Phone, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 import { PageTransition } from '../components/PageTransition.tsx';
 
 const ContactPage: React.FC = () => {
@@ -17,7 +18,28 @@ const ContactPage: React.FC = () => {
         setStatus('loading');
 
         try {
-            const response = await fetch('https://arc-mz3x.onrender.com/api/contact', {
+            const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
+            // 1. Send Email Notification via EmailJS (if configured)
+            if (import.meta.env.VITE_EMAILJS_SERVICE_ID) {
+                try {
+                    await emailjs.send(
+                        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+                        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+                        {
+                            from_name: formData.name,
+                            reply_to: formData.email,
+                            message: formData.message,
+                        },
+                        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+                    );
+                } catch (emailErr) {
+                    console.error('EmailJS Error:', emailErr);
+                }
+            }
+
+            // 2. Save inquiry to MongoDB database backend
+            const response = await fetch(`${apiUrl}/api/contact`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
