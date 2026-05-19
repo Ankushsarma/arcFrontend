@@ -12,6 +12,7 @@ import ZarvexPage from './pages/ZarvexPage.tsx';
 import PranaPage from './pages/PranaPage.tsx';
 import MorphPage from './pages/MorphPage.tsx';
 import ContactPage from './pages/ContactPage.tsx';
+import ProjectPage from './pages/ProjectPage.tsx';
 
 /* Scroll to top on route change */
 const ScrollToTop: React.FC = () => {
@@ -58,6 +59,7 @@ const App: React.FC = () => {
                 <Route path="/ecosystems/morph" element={
                   <ProtectedRoute><MorphPage /></ProtectedRoute>
                 } />
+                <Route path="/project/:id" element={<ProjectPage />} />
               </Routes>
             </div>
           </AnimatePresence>

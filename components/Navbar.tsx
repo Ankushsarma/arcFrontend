@@ -6,9 +6,10 @@ import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.tsx';
 
 const ecosystemItems = [
-  { name: 'ZARVEX', path: '/ecosystems/zarvex', subtitle: 'Aerial Intelligence', color: 'text-emerald-400' },
-  { name: 'PRANA', path: '/ecosystems/prana', subtitle: 'Energy Platform', color: 'text-cyan-400' },
-  { name: 'MORPH', path: '/ecosystems/morph', subtitle: 'Ground Operations', color: 'text-blue-400' },
+  { name: 'ZARVEX', path: '/project/zarvex', subtitle: 'Aerial Intelligence', color: 'text-emerald-400' },
+  { name: 'AEGIS', path: '/project/aegis', subtitle: 'Identity System', color: 'text-blue-400' },
+  { name: 'UNIMOUNT', path: '/project/unimount', subtitle: 'Universal Sensing', color: 'text-amber-400' },
+  { name: 'ARISE', path: '/project/arise', subtitle: 'Land Maneuvering', color: 'text-cyan-400' },
 ];
 
 const dropdownVariants = {
