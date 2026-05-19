@@ -35,17 +35,20 @@ export const AboutUsSection: React.FC = () => {
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-cyan-500/20 glass text-[10px] font-bold tracking-[0.4em] text-cyan-400 uppercase mb-8">
                 <Target size={12} className="fill-current" /> Our Mission
               </div>
+
               <h2 className="text-4xl md:text-6xl font-bold font-heading mb-8 tracking-tight text-white leading-tight">
                 Rethinking{" "}
                 <span className="text-cyan-400 italic">Intelligent</span>
                 <br />
                 Hardware Systems
               </h2>
+
               <p className="text-slate-400 text-lg md:text-xl leading-relaxed mb-8 font-light">
                 ArcVion is a research-driven technology company focused on
                 rethinking how intelligent hardware systems are designed, built,
                 and deployed.
               </p>
+
               <p className="text-slate-500 text-base leading-relaxed mb-10">
                 Modern industries face a fundamental challenge — systems are
                 built for specific tasks, making them rigid, costly, and
@@ -53,6 +56,21 @@ export const AboutUsSection: React.FC = () => {
                 principles, designing new architectures that enable machines to
                 adapt and evolve without complete redesigns.
               </p>
+
+              {/* Dummy Images */}
+              <div className="grid grid-cols-2 gap-4 mb-10">
+                <img
+                  src="/robotic_architecture_lab_1779215688019.png"
+                  alt="Technology Lab"
+                  className="rounded-2xl object-cover h-48 w-full border border-white/10 opacity-80"
+                />
+
+                <img
+                  src="/autonomous_systems_interface_1779215768504.png"
+                  alt="Engineering Workspace"
+                  className="rounded-2xl object-cover h-48 w-full border border-white/10 opacity-80"
+                />
+              </div>
 
               <div className="grid sm:grid-cols-2 gap-6">
                 {[
@@ -69,15 +87,17 @@ export const AboutUsSection: React.FC = () => {
                 ].map((item, i) => (
                   <div
                     key={i}
-                    className="flex gap-4 p-4 rounded-2xl glass border-white/5"
+                    className="flex gap-4 p-4 rounded-2xl glass border border-white/5"
                   >
                     <div className="w-10 h-10 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 shrink-0">
                       <item.icon size={20} />
                     </div>
+
                     <div>
                       <h4 className="text-white font-bold text-sm mb-1">
                         {item.title}
                       </h4>
+
                       <p className="text-slate-500 text-xs leading-relaxed">
                         {item.desc}
                       </p>
@@ -93,12 +113,23 @@ export const AboutUsSection: React.FC = () => {
             <ScrollReveal delay={0.2}>
               <div className="relative rounded-3xl p-1 overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 via-transparent to-blue-500/20 opacity-50" />
+
                 <div className="relative glass rounded-[22px] p-10 border border-white/10">
                   <div className="flex items-center gap-3 mb-10">
                     <Users className="text-cyan-400" size={24} />
+
                     <h3 className="text-xl font-bold text-white tracking-tight">
                       Founding Team
                     </h3>
+                  </div>
+
+                  {/* Team Image */}
+                  <div className="mb-10">
+                    <img
+                      src="/robotic_architecture_lab_1779215688019.png"
+                      alt="Founding Team"
+                      className="rounded-2xl object-cover h-64 w-full border border-white/10 opacity-90"
+                    />
                   </div>
 
                   <div className="space-y-8 mb-12">
@@ -107,20 +138,25 @@ export const AboutUsSection: React.FC = () => {
                         <p className="text-xs font-mono text-cyan-500 mb-2 tracking-widest uppercase">
                           Founders
                         </p>
+
                         <p className="text-white font-bold text-lg leading-tight mb-1">
                           Sai Mithil K
                         </p>
+
                         <p className="text-white font-bold text-lg leading-tight">
                           Ritam Pandey
                         </p>
                       </div>
+
                       <div>
                         <p className="text-xs font-mono text-slate-500 mb-2 tracking-widest uppercase">
                           Founding Members
                         </p>
+
                         <p className="text-slate-300 font-medium text-base mb-1">
                           Shivam Yadav
                         </p>
+
                         <p className="text-slate-300 font-medium text-base">
                           Pawan Kalyan
                         </p>
@@ -133,8 +169,10 @@ export const AboutUsSection: React.FC = () => {
                       "The future of intelligent systems lies not in building
                       more machines, but in building smarter architectures."
                     </p>
+
                     <div className="flex items-center gap-3">
                       <div className="w-8 h-[1px] bg-cyan-500" />
+
                       <span className="text-xs font-mono text-cyan-400 tracking-[0.3em] uppercase">
                         Core Philosophy
                       </span>

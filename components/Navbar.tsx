@@ -1,31 +1,54 @@
-
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Cpu, ChevronRight, ChevronDown, LogOut } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext.tsx';
+import React, { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X, Cpu, ChevronRight, ChevronDown, LogOut } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+import { useAuth } from "../context/AuthContext.tsx";
 
 const ecosystemItems = [
-  { name: 'ZARVEX', path: '/project/zarvex', subtitle: 'Aerial Intelligence', color: 'text-emerald-400' },
-  { name: 'AEGIS', path: '/project/aegis', subtitle: 'Identity System', color: 'text-blue-400' },
-  { name: 'UNIMOUNT', path: '/project/unimount', subtitle: 'Universal Sensing', color: 'text-amber-400' },
-  { name: 'ARISE', path: '/project/arise', subtitle: 'Land Maneuvering', color: 'text-cyan-400' },
+  {
+    name: "ZARVEX",
+    path: "/project/zarvex",
+    subtitle: "Aerial Intelligence",
+    color: "text-emerald-400",
+  },
+  {
+    name: "AEGIS",
+    path: "/project/aegis",
+    subtitle: "Identity System",
+    color: "text-blue-400",
+  },
+  {
+    name: "UNIMOUNT",
+    path: "/project/unimount",
+    subtitle: "Universal Sensing",
+    color: "text-amber-400",
+  },
+  {
+    name: "ARISE",
+    path: "/project/arise",
+    subtitle: "Land Maneuvering",
+    color: "text-cyan-400",
+  },
 ];
 
 const dropdownVariants = {
-  hidden: { opacity: 0, y: 8, scale: 0.96, filter: 'blur(4px)' },
+  hidden: { opacity: 0, y: 8, scale: 0.96, filter: "blur(4px)" },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
-    filter: 'blur(0px)',
-    transition: { duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94], staggerChildren: 0.05 },
+    filter: "blur(0px)",
+    transition: {
+      duration: 0.25,
+      ease: [0.25, 0.46, 0.45, 0.94],
+      staggerChildren: 0.05,
+    },
   },
   exit: {
     opacity: 0,
     y: 6,
     scale: 0.97,
-    filter: 'blur(4px)',
+    filter: "blur(4px)",
     transition: { duration: 0.2, ease: [0.55, 0.06, 0.68, 0.19] },
   },
 };
@@ -52,7 +75,7 @@ const DesktopAuthSection: React.FC = () => {
             />
           ) : (
             <div className="w-7 h-7 rounded-full bg-cyan-500/20 border border-cyan-500/30 flex items-center justify-center text-[10px] font-bold text-cyan-400">
-              {currentUser.displayName?.[0] || currentUser.email?.[0] || '?'}
+              {currentUser.displayName?.[0] || currentUser.email?.[0] || "?"}
             </div>
           )}
           <span className="text-xs font-medium text-slate-300 max-w-[100px] truncate">
@@ -74,7 +97,10 @@ const DesktopAuthSection: React.FC = () => {
 
   return (
     <div className="hidden md:flex items-center gap-4">
-      <Link to="/login" className="px-5 py-2 text-sm font-semibold text-slate-400 hover:text-white transition-colors">
+      <Link
+        to="/login"
+        className="px-5 py-2 text-sm font-semibold text-slate-400 hover:text-white transition-colors"
+      >
         LOG IN
       </Link>
       <button className="px-6 py-2.5 text-sm font-bold bg-white text-black rounded-full hover:bg-cyan-400 transition-all flex items-center gap-2 energy-pulse">
@@ -101,7 +127,7 @@ const MobileAuthSection: React.FC = () => {
             />
           ) : (
             <div className="w-8 h-8 rounded-full bg-cyan-500/20 border border-cyan-500/30 flex items-center justify-center text-xs font-bold text-cyan-400">
-              {currentUser.displayName?.[0] || currentUser.email?.[0] || '?'}
+              {currentUser.displayName?.[0] || currentUser.email?.[0] || "?"}
             </div>
           )}
           <span className="text-sm font-medium text-slate-300 truncate">
@@ -119,7 +145,10 @@ const MobileAuthSection: React.FC = () => {
   }
 
   return (
-    <Link to="/login" className="w-full py-4 bg-white text-black font-bold rounded-xl mt-2 block text-center">
+    <Link
+      to="/login"
+      className="w-full py-4 bg-white text-black font-bold rounded-xl mt-2 block text-center"
+    >
       LOG IN
     </Link>
   );
@@ -151,8 +180,8 @@ export const Navbar: React.FC = () => {
       }
       lastScrollY.current = currentScrollY;
     };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleDropdownEnter = () => {
@@ -165,23 +194,25 @@ export const Navbar: React.FC = () => {
   };
 
   const navItems = [
-    { label: 'Platforms', href: '/#platforms' },
-    { label: 'Ecosystems', href: '#', hasDropdown: true },
-    { label: 'Engineering', href: '/#engineering' },
-    { label: 'About Us', href: '/#about-us' },
-    { label: 'Contact', href: '/contact' },
+    { label: "Platforms", href: "/#platforms" },
+    { label: "Ecosystems", href: "#", hasDropdown: true },
+    { label: "Engineering", href: "/#engineering" },
+    { label: "About Us", href: "/about" },
+    { label: "Contact", href: "/contact" },
   ];
 
   return (
     <motion.nav
       initial={{ y: 0 }}
       animate={{ y: isVisible ? 0 : -100 }}
-      transition={{ duration: 0.4, ease: 'easeInOut' }}
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled ? 'py-3' : 'py-6'}`}
+      transition={{ duration: 0.4, ease: "easeInOut" }}
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled ? "py-3" : "py-6"}`}
     >
       <div className="max-w-7xl mx-auto px-6">
         <div
-          className={`glass rounded-2xl flex items-center justify-between px-6 py-3 transition-all ${isScrolled ? 'shadow-[0_20px_50px_rgba(0,0,0,0.5)] border-white/20' : 'border-white/10'
+          className={`glass rounded-2xl flex items-center justify-between px-6 py-3 transition-all ${isScrolled
+              ? "shadow-[0_20px_50px_rgba(0,0,0,0.5)] border-white/20"
+              : "border-white/10"
             }`}
         >
           {/* Logo */}
@@ -211,11 +242,11 @@ export const Navbar: React.FC = () => {
                     {item.label}
                     <ChevronDown
                       size={14}
-                      className={`transition-transform duration-300 ${isDropdownOpen ? 'rotate-180 text-cyan-400' : ''}`}
+                      className={`transition-transform duration-300 ${isDropdownOpen ? "rotate-180 text-cyan-400" : ""}`}
                     />
                     <motion.span
                       className="absolute -bottom-1 left-0 w-0 h-[2px] bg-cyan-400"
-                      whileHover={{ width: '100%' }}
+                      whileHover={{ width: "100%" }}
                     />
                   </button>
 
@@ -228,11 +259,12 @@ export const Navbar: React.FC = () => {
                         exit="exit"
                         className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-64 rounded-2xl overflow-hidden"
                         style={{
-                          background: 'rgba(8, 15, 30, 0.85)',
-                          backdropFilter: 'blur(20px)',
-                          WebkitBackdropFilter: 'blur(20px)',
-                          border: '1px solid rgba(34, 211, 238, 0.15)',
-                          boxShadow: '0 0 30px rgba(34, 211, 238, 0.08), 0 20px 60px rgba(0,0,0,0.5)',
+                          background: "rgba(8, 15, 30, 0.85)",
+                          backdropFilter: "blur(20px)",
+                          WebkitBackdropFilter: "blur(20px)",
+                          border: "1px solid rgba(34, 211, 238, 0.15)",
+                          boxShadow:
+                            "0 0 30px rgba(34, 211, 238, 0.08), 0 20px 60px rgba(0,0,0,0.5)",
                         }}
                       >
                         {/* Top glow accent */}
@@ -251,7 +283,9 @@ export const Navbar: React.FC = () => {
                                 <div className="w-2 h-2 rounded-full bg-cyan-500/50 group-hover/item:bg-cyan-400 group-hover/item:shadow-[0_0_8px_rgba(34,211,238,0.5)] transition-all duration-300" />
 
                                 <div className="relative z-10">
-                                  <div className={`text-sm font-bold tracking-wider ${eco.color} group-hover/item:text-white transition-colors duration-300`}>
+                                  <div
+                                    className={`text-sm font-bold tracking-wider ${eco.color} group-hover/item:text-white transition-colors duration-300`}
+                                  >
                                     {eco.name}
                                   </div>
                                   <div className="text-[10px] text-slate-500 tracking-wider uppercase">
@@ -283,7 +317,7 @@ export const Navbar: React.FC = () => {
                   {item.label}
                   <motion.span
                     className="absolute -bottom-1 left-0 w-0 h-[2px] bg-cyan-400"
-                    whileHover={{ width: '100%' }}
+                    whileHover={{ width: "100%" }}
                   />
                 </Link>
               ),
@@ -322,14 +356,14 @@ export const Navbar: React.FC = () => {
                     {item.label}
                     <ChevronDown
                       size={16}
-                      className={`transition-transform duration-300 ${isMobileEcoOpen ? 'rotate-180' : ''}`}
+                      className={`transition-transform duration-300 ${isMobileEcoOpen ? "rotate-180" : ""}`}
                     />
                   </button>
                   <AnimatePresence>
                     {isMobileEcoOpen && (
                       <motion.div
                         initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
+                        animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
                         className="overflow-hidden pl-4 mt-2 flex flex-col gap-2"
                       >
@@ -340,7 +374,9 @@ export const Navbar: React.FC = () => {
                             className={`text-sm font-bold tracking-wider ${eco.color} hover:text-white transition-colors py-1`}
                           >
                             {eco.name}
-                            <span className="text-[10px] text-slate-500 ml-2">{eco.subtitle}</span>
+                            <span className="text-[10px] text-slate-500 ml-2">
+                              {eco.subtitle}
+                            </span>
                           </Link>
                         ))}
                       </motion.div>

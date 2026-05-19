@@ -1,18 +1,18 @@
-
-import React, { useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
-import { AuthProvider } from './context/AuthContext.tsx';
-import { Navbar } from './components/Navbar.tsx';
-import { Footer } from './components/Footer.tsx';
-import { ProtectedRoute } from './components/ProtectedRoute.tsx';
-import HomePage from './pages/HomePage.tsx';
-import LoginPage from './pages/LoginPage.tsx';
-import ZarvexPage from './pages/ZarvexPage.tsx';
-import PranaPage from './pages/PranaPage.tsx';
-import MorphPage from './pages/MorphPage.tsx';
-import ContactPage from './pages/ContactPage.tsx';
-import ProjectPage from './pages/ProjectPage.tsx';
+import React, { useEffect } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
+import { AuthProvider } from "./context/AuthContext.tsx";
+import { Navbar } from "./components/Navbar.tsx";
+import { Footer } from "./components/Footer.tsx";
+import { ProtectedRoute } from "./components/ProtectedRoute.tsx";
+import HomePage from "./pages/HomePage.tsx";
+import LoginPage from "./pages/LoginPage.tsx";
+import ZarvexPage from "./pages/ZarvexPage.tsx";
+import PranaPage from "./pages/PranaPage.tsx";
+import MorphPage from "./pages/MorphPage.tsx";
+import ContactPage from "./pages/ContactPage.tsx";
+import ProjectPage from "./pages/ProjectPage.tsx";
+import AboutPage from "./pages/AboutPage.tsx";
 
 /* Scroll to top on route change */
 const ScrollToTop: React.FC = () => {
@@ -48,17 +48,33 @@ const App: React.FC = () => {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/contact" element={<ContactPage />} />
+                <Route path="/about" element={<AboutPage />} />
 
                 {/* Protected routes */}
-                <Route path="/ecosystems/zarvex" element={
-                  <ProtectedRoute><ZarvexPage /></ProtectedRoute>
-                } />
-                <Route path="/ecosystems/prana" element={
-                  <ProtectedRoute><PranaPage /></ProtectedRoute>
-                } />
-                <Route path="/ecosystems/morph" element={
-                  <ProtectedRoute><MorphPage /></ProtectedRoute>
-                } />
+                <Route
+                  path="/ecosystems/zarvex"
+                  element={
+                    <ProtectedRoute>
+                      <ZarvexPage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/ecosystems/prana"
+                  element={
+                    <ProtectedRoute>
+                      <PranaPage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/ecosystems/morph"
+                  element={
+                    <ProtectedRoute>
+                      <MorphPage />
+                    </ProtectedRoute>
+                  }
+                />
                 <Route path="/project/:id" element={<ProjectPage />} />
               </Routes>
             </div>

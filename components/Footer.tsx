@@ -8,6 +8,7 @@ import {
   MapPin,
   Phone,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export const Footer: React.FC = () => {
   return (
@@ -15,14 +16,14 @@ export const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid md:grid-cols-4 gap-12 mb-16">
           <div className="col-span-2">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-8 h-8 bg-cyan-500 rounded flex items-center justify-center shadow-[0_0_15px_rgba(34,211,238,0.3)]">
+            <Link to="/" className="flex items-center gap-3 mb-6 group">
+              <div className="w-8 h-8 bg-cyan-500 rounded flex items-center justify-center shadow-[0_0_15px_rgba(34,211,238,0.3)] group-hover:scale-110 transition-transform">
                 <Cpu size={20} className="text-white" />
               </div>
               <span className="text-xl font-bold font-heading tracking-tighter text-white">
-                ARC<span className="text-cyan-400">VION</span>
+                ARC<span className="text-cyan-400 text-shadow-glow">VION</span>
               </span>
-            </div>
+            </Link>
             <p className="text-slate-400 max-w-sm mb-6 leading-relaxed italic border-l-2 border-cyan-500/30 pl-4 font-light">
               "The future of intelligent systems lies not in building more
               machines, but in building smarter architectures."
