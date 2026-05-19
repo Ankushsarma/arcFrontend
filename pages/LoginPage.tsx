@@ -1,9 +1,9 @@
-import React, { useState, useMemo } from 'react';
-import { motion } from 'framer-motion';
-import { Cpu, Shield, ArrowRight } from 'lucide-react';
-import { useAuth } from '../context/AuthContext.tsx';
-import { Navigate, useLocation } from 'react-router-dom';
-import { PageTransition } from '../components/PageTransition.tsx';
+import React, { useState, useMemo } from "react";
+import { motion } from "framer-motion";
+import { Cpu, Shield, ArrowRight } from "lucide-react";
+import { useAuth } from "../context/AuthContext.tsx";
+import { Navigate, useLocation } from "react-router-dom";
+import { PageTransition } from "../components/PageTransition.tsx";
 
 /* ─── Floating particles for visual depth ─── */
 const AuthParticles: React.FC = () => {
@@ -26,9 +26,19 @@ const AuthParticles: React.FC = () => {
         <motion.div
           key={p.id}
           className="absolute rounded-full bg-cyan-400/15"
-          style={{ left: `${p.x}%`, top: `${p.y}%`, width: p.size, height: p.size }}
+          style={{
+            left: `${p.x}%`,
+            top: `${p.y}%`,
+            width: p.size,
+            height: p.size,
+          }}
           animate={{ y: [0, -60, 0], opacity: [0.1, 0.5, 0.1] }}
-          transition={{ duration: p.duration, repeat: Infinity, ease: 'linear', delay: p.delay }}
+          transition={{
+            duration: p.duration,
+            repeat: Infinity,
+            ease: "linear",
+            delay: p.delay,
+          }}
         />
       ))}
     </div>
@@ -36,12 +46,14 @@ const AuthParticles: React.FC = () => {
 };
 
 const LoginPage: React.FC = () => {
-  const { currentUser, loginWithGoogle, isFirebaseConfigured } = useAuth();
+  const { currentUser, loginWithGoogle, loginAsGuest, isFirebaseConfigured } =
+    useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const location = useLocation();
 
-  const from = (location.state as { from?: { pathname: string } })?.from?.pathname || '/';
+  const from =
+    (location.state as { from?: { pathname: string } })?.from?.pathname || "/";
 
   // If already logged in, redirect
   if (currentUser) {
@@ -50,7 +62,9 @@ const LoginPage: React.FC = () => {
 
   const handleGoogleLogin = async () => {
     if (!isFirebaseConfigured) {
-      setError('Firebase is not configured. Please add your VITE_FIREBASE_* keys to .env.local and restart the server.');
+      setError(
+        "Firebase is not configured. Please add your VITE_FIREBASE_* keys to .env.local and restart the server.",
+      );
       return;
     }
     setIsLoading(true);
@@ -58,12 +72,20 @@ const LoginPage: React.FC = () => {
     try {
       await loginWithGoogle();
     } catch (err: any) {
-      if (err?.code !== 'auth/popup-closed-by-user') {
-        setError(err?.message || 'Authentication failed. Please try again.');
+      if (err?.code !== "auth/popup-closed-by-user") {
+        setError(err?.message || "Authentication failed. Please try again.");
       }
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleGuestLogin = () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      loginAsGuest();
+      setIsLoading(false);
+    }, 800); // Slight delay for realistic feel
   };
 
   return (
@@ -91,11 +113,12 @@ const LoginPage: React.FC = () => {
           <div
             className="relative rounded-3xl p-10 overflow-hidden"
             style={{
-              background: 'rgba(8, 15, 30, 0.75)',
-              backdropFilter: 'blur(24px)',
-              WebkitBackdropFilter: 'blur(24px)',
-              border: '1px solid rgba(34, 211, 238, 0.12)',
-              boxShadow: '0 0 60px rgba(34, 211, 238, 0.06), 0 25px 80px rgba(0,0,0,0.5)',
+              background: "rgba(8, 15, 30, 0.75)",
+              backdropFilter: "blur(24px)",
+              WebkitBackdropFilter: "blur(24px)",
+              border: "1px solid rgba(34, 211, 238, 0.12)",
+              boxShadow:
+                "0 0 60px rgba(34, 211, 238, 0.06), 0 25px 80px rgba(0,0,0,0.5)",
             }}
           >
             {/* Top glow line */}
@@ -135,35 +158,35 @@ const LoginPage: React.FC = () => {
                 </h1>
 
                 <p className="text-slate-400 text-sm mb-10 max-w-xs mx-auto leading-relaxed">
-                  Authenticate with your Google account to access modular robotics infrastructure.
+                  Authenticate or proceed as guest to explore our modular
+                  robotics infrastructure.
                 </p>
               </motion.div>
 
-              {/* Google Sign-In Button */}
+              {/* Buttons */}
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
+                className="space-y-4"
               >
+                {/* Google Sign-In */}
                 <motion.button
                   onClick={handleGoogleLogin}
                   disabled={isLoading}
-                  whileHover={{ scale: 1.03, boxShadow: '0 0 40px rgba(34, 211, 238, 0.2)' }}
-                  whileTap={{ scale: 0.97 }}
-                  className="w-full group relative flex items-center justify-center gap-3 px-6 py-4 rounded-2xl font-bold text-sm tracking-wider transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden"
-                  style={{
-                    background: 'linear-gradient(135deg, rgba(34, 211, 238, 0.15), rgba(59, 130, 246, 0.15))',
-                    border: '1px solid rgba(34, 211, 238, 0.25)',
-                  }}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full group relative flex items-center justify-center gap-3 px-6 py-4 rounded-2xl font-bold text-sm tracking-wider transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden bg-white text-black"
                 >
-                  {/* Hover glow background */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r from-cyan-500/10 via-cyan-500/20 to-blue-500/10 pointer-events-none" />
-
                   {isLoading ? (
                     <motion.div
                       animate={{ rotate: 360 }}
-                      transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-                      className="w-5 h-5 border-2 border-cyan-400/30 border-t-cyan-400 rounded-full"
+                      transition={{
+                        duration: 1,
+                        repeat: Infinity,
+                        ease: "linear",
+                      }}
+                      className="w-5 h-5 border-2 border-black/30 border-t-black rounded-full"
                     />
                   ) : (
                     <svg className="w-5 h-5" viewBox="0 0 24 24">
@@ -185,14 +208,24 @@ const LoginPage: React.FC = () => {
                       />
                     </svg>
                   )}
-
-                  <span className="relative z-10 text-white">
-                    {isLoading ? 'CONNECTING...' : 'SIGN IN WITH GOOGLE'}
+                  <span>
+                    {isLoading ? "CONNECTING..." : "SIGN IN WITH GOOGLE"}
                   </span>
+                </motion.button>
 
+                {/* Guest Login */}
+                <motion.button
+                  onClick={handleGuestLogin}
+                  disabled={isLoading}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full group relative flex items-center justify-center gap-2 px-6 py-4 rounded-2xl font-bold text-sm tracking-wider transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden glass border-white/10 text-slate-300 hover:text-white hover:border-cyan-500/30"
+                >
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r from-cyan-500/5 via-cyan-500/10 to-transparent pointer-events-none" />
+                  <span>CONTINUE AS GUEST</span>
                   <ArrowRight
                     size={16}
-                    className="relative z-10 text-cyan-400 group-hover:translate-x-1 transition-transform duration-300"
+                    className="group-hover:translate-x-1 transition-transform"
                   />
                 </motion.button>
               </motion.div>
