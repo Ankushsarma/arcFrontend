@@ -222,14 +222,14 @@ export const Hero: React.FC<HeroProps> = ({ scrollY }) => {
       <div className="absolute bottom-0 left-0 w-full h-[50vh] bg-gradient-to-t from-[#020617] via-[#020617]/90 to-transparent pointer-events-none z-20"></div>
 
       <motion.div
-        style={{ y: textY, opacity }}
-        className="relative z-10 text-center max-w-7xl px-6"
+        style={{ y: textY }}
+        className="relative z-10 w-full max-w-7xl px-6 text-center"
       >
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="mb-4 text-[11px] font-bold tracking-[0.5em] text-cyan-400/80 uppercase"
+          className="mb-5 text-[10px] font-black tracking-[0.46em] text-cyan-300/90 uppercase"
         >
           Research-driven technology rethinking intelligent hardware
         </motion.div>
@@ -238,7 +238,7 @@ export const Hero: React.FC<HeroProps> = ({ scrollY }) => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.2 }}
-          className="mb-6 inline-flex items-center gap-2 px-5 py-2 rounded-full border border-cyan-500/30 glass text-[11px] font-bold tracking-[0.4em] text-cyan-400 uppercase shadow-[0_0_15px_rgba(34,211,238,0.2)]"
+          className="mb-8 inline-flex items-center gap-2 rounded-full border border-cyan-400/25 bg-cyan-400/10 px-5 py-2 text-[11px] font-black uppercase tracking-[0.34em] text-cyan-300 shadow-[0_0_28px_rgba(34,211,238,0.12)]"
         >
           <Zap size={12} className="fill-current animate-pulse" /> Unified
           Hardware Ecosystem
@@ -248,12 +248,12 @@ export const Hero: React.FC<HeroProps> = ({ scrollY }) => {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.4 }}
-          className="text-7xl md:text-[9rem] font-bold font-heading mb-10 tracking-tighter leading-[0.85] flex flex-col"
+          className="mx-auto flex max-w-[1100px] flex-col overflow-visible font-heading text-[clamp(4rem,9vw,7.5rem)] font-black leading-[0.92] tracking-tight"
         >
           <span className="text-white drop-shadow-[0_5px_15px_rgba(0,0,0,0.5)]">
             ONE PLATFORM
           </span>
-          <span className="animate-gradient-text italic font-black">
+          <span className="animate-gradient-text italic">
             INFINITE MISSIONS
           </span>
         </motion.h1>
@@ -262,14 +262,39 @@ export const Hero: React.FC<HeroProps> = ({ scrollY }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.7 }}
-          className="text-xl md:text-2xl text-slate-400 mb-16 max-w-3xl mx-auto leading-relaxed font-light"
+          className="mx-auto mt-8 max-w-4xl text-lg font-medium leading-relaxed text-slate-300 drop-shadow-[0_4px_18px_rgba(0,0,0,0.7)] md:text-2xl"
         >
           Modular robotic and sensing systems that adapt instantly through{" "}
-          <span className="text-white font-medium">
+          <span className="text-white font-black">
             interchangeable hardware modules.
           </span>{" "}
           Reconfigure in seconds, deploy for weeks.
         </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.9 }}
+          className="mx-auto mt-12 grid max-w-4xl gap-3 border-y border-white/10 py-4 text-left sm:grid-cols-3"
+        >
+          {[
+            ["01", "Modular robotics"],
+            ["02", "Applied AI systems"],
+            ["03", "Field-ready architecture"],
+          ].map(([index, label]) => (
+            <div
+              key={label}
+              className="flex items-center gap-4 rounded-xl bg-white/[0.025] px-4 py-3"
+            >
+              <span className="font-mono text-[10px] font-black text-cyan-300">
+                {index}
+              </span>
+              <span className="text-xs font-bold uppercase tracking-[0.18em] text-slate-300">
+                {label}
+              </span>
+            </div>
+          ))}
+        </motion.div>
       </motion.div>
 
       <motion.div

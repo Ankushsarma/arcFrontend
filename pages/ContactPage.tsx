@@ -13,6 +13,17 @@ import {
 import emailjs from "@emailjs/browser";
 import { PageTransition } from "../components/PageTransition.tsx";
 
+const registrationAddress =
+  "NO:33, 2ND MAIN WEST ROAD, SIDDARAMESWARA BADAVANE, BATAWADI, TUMKUR, KARNATAKA 572102.";
+const mapsAddressUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+  registrationAddress,
+)}`;
+const instagramUrl =
+  "https://www.instagram.com/arcvion_tech?igsh=cGliN2JzMG9sYXYy";
+
+const getContactApiUrl = () =>
+  (import.meta.env.VITE_API_URL || "").trim().replace(/\/+$/, "");
+
 const ContactPage: React.FC = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -35,7 +46,11 @@ const ContactPage: React.FC = () => {
     setStatus("loading");
 
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
+      const apiUrl = getContactApiUrl();
+
+      if (!apiUrl) {
+        throw new Error("Missing VITE_API_URL for the contact backend.");
+      }
 
       // 1. Send Email Notification via EmailJS (if configured)
       if (import.meta.env.VITE_EMAILJS_SERVICE_ID) {
@@ -72,7 +87,11 @@ const ContactPage: React.FC = () => {
     } catch (error) {
       console.error(error);
       setStatus("error");
-      setErrorMessage("Something went wrong. Please try again later.");
+      setErrorMessage(
+        error instanceof Error && error.message.includes("VITE_API_URL")
+          ? "Contact backend is not configured yet."
+          : "Something went wrong. Please try again later.",
+      );
       setTimeout(() => setStatus("idle"), 4000);
     }
   };
@@ -116,75 +135,83 @@ const ContactPage: React.FC = () => {
               className="space-y-8"
             >
               <div className="glass p-8 rounded-3xl border border-white/10 relative overflow-hidden group hover:border-cyan-500/30 transition-colors">
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                <h3 className="text-2xl font-bold text-white mb-6 font-heading">
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                <h3 className="relative z-10 text-2xl font-bold text-white mb-6 font-heading">
                   Contact Information
                 </h3>
 
-                <div className="space-y-6">
-                  <div className="flex items-center gap-4 group/item">
+                <div className="relative z-10 space-y-6">
+                  <a
+                    href="mailto:contact@arcvion.in"
+                    className="flex items-center gap-4 rounded-2xl p-2 -m-2 group/item transition-colors hover:bg-white/[0.03] focus:outline-none focus:ring-2 focus:ring-cyan-400/40"
+                  >
                     <div className="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center border border-cyan-500/20 group-hover/item:border-cyan-400/50 transition-colors">
-                      <Mail className="text-cyan-400 w-6 h-6" />
+                      <Mail className="h-6 w-6 shrink-0 text-cyan-400" />
                     </div>
                     <div>
                       <p className="text-xs text-slate-500 uppercase tracking-widest">
                         Email Us
                       </p>
-                      <a
-                        href="mailto:contact@arcvion.in"
-                        className="text-white font-medium hover:text-cyan-400 transition-colors font-mono uppercase tracking-tighter"
-                      >
+                      <p className="text-white font-medium transition-colors group-hover/item:text-cyan-400 font-mono uppercase tracking-tighter">
                         contact@arcvion.in
-                      </a>
+                      </p>
                     </div>
-                  </div>
+                  </a>
 
-                  <div className="flex items-center gap-4 group/item">
+                  <a
+                    href="tel:+919384041978"
+                    className="flex items-center gap-4 rounded-2xl p-2 -m-2 group/item transition-colors hover:bg-white/[0.03] focus:outline-none focus:ring-2 focus:ring-emerald-400/40"
+                  >
                     <div className="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20 group-hover/item:border-emerald-400/50 transition-colors">
-                      <Phone className="text-emerald-400 w-6 h-6" />
+                      <Phone className="h-6 w-6 shrink-0 text-emerald-400" />
                     </div>
                     <div>
                       <p className="text-xs text-slate-500 uppercase tracking-widest">
                         Call Us
                       </p>
-                      <p className="text-white font-medium font-mono">
+                      <p className="text-white font-medium font-mono transition-colors group-hover/item:text-emerald-400">
                         9384041978
                       </p>
                     </div>
-                  </div>
+                  </a>
 
-                  <div className="flex items-center gap-4 group/item">
+                  <a
+                    href={mapsAddressUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-4 rounded-2xl p-2 -m-2 group/item transition-colors hover:bg-white/[0.03] focus:outline-none focus:ring-2 focus:ring-blue-400/40"
+                  >
                     <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center border border-blue-500/20 group-hover/item:border-blue-400/50 transition-colors">
-                      <MapPin className="text-blue-400 w-6 h-6" />
+                      <MapPin className="h-6 w-6 shrink-0 text-blue-400" />
                     </div>
                     <div>
                       <p className="text-xs text-slate-500 uppercase tracking-widest">
-                        Headquarters
+                        Registration Address
                       </p>
-                      <p className="text-white font-medium">
-                        Tumkur, Karnataka
+                      <p className="max-w-sm text-white font-medium leading-relaxed transition-colors group-hover/item:text-blue-400">
+                        {registrationAddress}
                       </p>
                     </div>
-                  </div>
+                  </a>
 
-                  <div className="flex items-center gap-4 group/item">
+                  <a
+                    href={instagramUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-4 rounded-2xl p-2 -m-2 group/item transition-colors hover:bg-white/[0.03] focus:outline-none focus:ring-2 focus:ring-pink-400/40"
+                  >
                     <div className="w-12 h-12 rounded-xl bg-pink-500/10 flex items-center justify-center border border-pink-500/20 group-hover/item:border-pink-400/50 transition-colors">
-                      <Instagram className="text-pink-400 w-6 h-6" />
+                      <Instagram className="h-6 w-6 shrink-0 text-pink-400" />
                     </div>
                     <div>
                       <p className="text-xs text-slate-500 uppercase tracking-widest">
                         Follow Us
                       </p>
-                      <a
-                        href="https://www.instagram.com/arcvion_tech?igsh=cGliN2JzMG9sYXYy"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-white font-medium hover:text-pink-400 transition-colors font-mono tracking-tighter uppercase"
-                      >
+                      <p className="text-white font-medium transition-colors group-hover/item:text-pink-400 font-mono tracking-tighter uppercase">
                         @arcvion_tech
-                      </a>
+                      </p>
                     </div>
-                  </div>
+                  </a>
                 </div>
               </div>
             </motion.div>

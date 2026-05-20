@@ -104,12 +104,18 @@ const PranaPage: React.FC = () => {
 
           <ScrollReveal delay={0.3}>
             <div className="flex flex-col sm:flex-row gap-5 justify-center">
-              <button className="px-10 py-4 bg-white text-black font-extrabold rounded-2xl flex items-center justify-center gap-3 hover:bg-cyan-400 transition-all hover:scale-105 active:scale-95 shadow-[0_0_40px_rgba(255,255,255,0.08)] group">
+              <Link
+                to="/contact"
+                className="px-10 py-4 bg-white text-black font-extrabold rounded-2xl flex items-center justify-center gap-3 hover:bg-cyan-400 transition-all hover:scale-105 active:scale-95 shadow-[0_0_40px_rgba(255,255,255,0.08)] group"
+              >
                 REQUEST ACCESS <ArrowUpRight className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" size={18} />
-              </button>
-              <button className="px-10 py-4 glass border-white/20 text-white font-extrabold rounded-2xl hover:bg-white/10 transition-all">
-                POWER SPECS v1.8
-              </button>
+              </Link>
+              <Link
+                to="/contact"
+                className="px-10 py-4 glass border-white/20 text-white font-extrabold rounded-2xl hover:bg-white/10 transition-all"
+              >
+                REQUEST POWER SPECS
+              </Link>
             </div>
           </ScrollReveal>
         </div>
@@ -157,10 +163,10 @@ const PranaPage: React.FC = () => {
           <ScrollReveal>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
               {[
-                { value: '40%', label: 'Extended Runtime' },
-                { value: '<15s', label: 'Hot-Swap Time' },
-                { value: '99.7%', label: 'Uptime SLA' },
-                { value: '∞', label: 'Charge Cycles' },
+                { value: 'Extended', label: 'Runtime Support' },
+                { value: 'Hot', label: 'Swap Workflow' },
+                { value: 'Smart', label: 'Health Monitoring' },
+                { value: 'Modular', label: 'Energy Options' },
               ].map((stat, i) => (
                 <motion.div
                   key={i}

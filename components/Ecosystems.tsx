@@ -2,6 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Truck, Wind, Anchor, ChevronRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export const Ecosystems: React.FC = () => {
   const ecosystems = [
@@ -11,7 +12,8 @@ export const Ecosystems: React.FC = () => {
       desc: 'All-terrain modular rovers for inspection, mapping, and heavy cargo.',
       icon: <Truck size={24} />,
       color: 'from-cyan-500 to-blue-600',
-      image: 'https://images.unsplash.com/photo-1518314916301-724f0c8ad671?auto=format&fit=crop&q=80&w=800'
+      image: '/robotic_architecture_lab_1779215688019.png',
+      path: '/ecosystems/morph',
     },
     {
       id: 'aerial',
@@ -19,15 +21,17 @@ export const Ecosystems: React.FC = () => {
       desc: 'High-endurance UAV systems with rapid module swapping for aerial intelligence.',
       icon: <Wind size={24} />,
       color: 'from-emerald-500 to-teal-600',
-      image: 'https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&q=80&w=800'
+      image: '/project-photos/image3.png',
+      path: '/project/zarvex',
     },
     {
-      id: 'static',
-      title: 'Static: SENSORIA',
-      desc: 'Fixed infrastructure sensors that auto-configure for long-term monitoring.',
+      id: 'identity',
+      title: 'Identity: AEGIS',
+      desc: 'Automated attendance infrastructure with 70+ capacity per device.',
       icon: <Anchor size={24} />,
       color: 'from-purple-500 to-pink-600',
-      image: 'https://images.unsplash.com/photo-1551703599-6b3e8379aa8c?auto=format&fit=crop&q=80&w=800'
+      image: '/project-photos/image2.png',
+      path: '/project/aegis',
     }
   ];
 
@@ -59,9 +63,12 @@ export const Ecosystems: React.FC = () => {
                 </div>
                 <h3 className="text-3xl font-bold font-heading mb-4 text-white uppercase tracking-tight">{eco.title}</h3>
                 <p className="text-slate-300 mb-8 leading-relaxed">{eco.desc}</p>
-                <button className="flex items-center gap-2 text-sm font-bold text-cyan-400 tracking-widest uppercase hover:text-white transition-colors">
+                <Link
+                  to={eco.path}
+                  className="flex items-center gap-2 text-sm font-bold text-cyan-400 tracking-widest uppercase hover:text-white transition-colors"
+                >
                   EXPLORE {eco.id} ARCHITECTURE <ChevronRight size={16} />
-                </button>
+                </Link>
               </div>
               
               {/* HUD Elements overlay */}

@@ -2,7 +2,7 @@
 
 > Modular Robotics Infrastructure — Web Platform
 
-ArcVion is a futuristic robotics infrastructure platform that showcases distinct robotic ecosystems (Zarvex, Prana, Morph). It features a cinematic UI with animated transitions, Firebase-based authentication, and a fully integrated contact system powered by EmailJS and a custom REST backend.
+ArcVion is a robotics infrastructure website that showcases modular hardware systems, applied AI projects, and commercial inquiry workflows. It features a cinematic UI with animated transitions and a contact system powered by EmailJS and a custom REST backend.
 
 ---
 
@@ -15,7 +15,6 @@ ArcVion is a futuristic robotics infrastructure platform that showcases distinct
 | Routing | [React Router v7](https://reactrouter.com/) |
 | Animations | [Framer Motion](https://www.framer-motion.com/) |
 | Icons | [Lucide React](https://lucide.dev/) |
-| Auth | [Firebase](https://firebase.google.com/) (Google Sign-In) |
 | Email | [EmailJS](https://www.emailjs.com/) (client-side email dispatch) |
 | Backend API | Custom Express.js REST API (see `/backend`) |
 | Dev Port | `3000` |
@@ -27,14 +26,13 @@ ArcVion is a futuristic robotics infrastructure platform that showcases distinct
 ```
 ArcV2.0/
 ├── components/         # Reusable UI components (Navbar, Footer, Hero, etc.)
-├── context/            # AuthContext — Firebase auth state
 ├── pages/              # Route-level pages
 │   ├── HomePage.tsx
-│   ├── LoginPage.tsx
 │   ├── ContactPage.tsx
-│   ├── ZarvexPage.tsx  # 🔒 Protected
-│   ├── PranaPage.tsx   # 🔒 Protected
-│   └── MorphPage.tsx   # 🔒 Protected
+│   ├── EngineeringPage.tsx
+│   ├── ZarvexPage.tsx
+│   ├── PranaPage.tsx
+│   └── MorphPage.tsx
 ├── lib/                # Utility/helper modules
 ├── App.tsx             # Root app with routing + AnimatePresence
 ├── index.tsx           # Entry point
@@ -46,11 +44,11 @@ ArcV2.0/
 
 ## ⚙️ Environment Variables
 
-Create a `.env` file in the `ArcV2.0/` root:
+Create a `.env` file in the project root. Use `.env.example` as the template:
 
 ```env
 # Backend API base URL
-VITE_API_URL=https://arc-mz3x.onrender.com
+VITE_API_URL=https://your-backend-render-url.onrender.com
 
 # EmailJS — for client-side email dispatch on the contact form
 VITE_EMAILJS_SERVICE_ID=your_service_id
@@ -97,19 +95,20 @@ npm run preview
 
 ---
 
-## 🔐 Authentication
-
-- Uses **Firebase Google Sign-In** via `AuthContext`.
-- Protected routes (`/ecosystems/zarvex`, `/ecosystems/prana`, `/ecosystems/morph`) are wrapped in `<ProtectedRoute>` — unauthenticated users are redirected to `/login`.
-
----
-
 ## 📬 Contact Form
 
 The contact page (`/contact`) uses a **dual-notification system**:
 
 1. **EmailJS** — sends an email notification directly from the browser using the configured service/template.
 2. **Backend REST API** (`POST /api/contact`) — persists the submission to MongoDB via the Express backend.
+
+For Render deployment, set `VITE_API_URL` on the frontend service to the deployed backend URL, for example:
+
+```env
+VITE_API_URL=https://arc-mz3x.onrender.com
+```
+
+Do not include `/api/contact` in `VITE_API_URL`; the frontend adds that path automatically.
 
 ---
 
@@ -118,8 +117,9 @@ The contact page (`/contact`) uses a **dual-notification system**:
 | Path | Page | Access |
 |---|---|---|
 | `/` | Home | Public |
-| `/login` | Login | Public |
 | `/contact` | Contact | Public |
-| `/ecosystems/zarvex` | Zarvex | 🔒 Protected |
-| `/ecosystems/prana` | Prana | 🔒 Protected |
-| `/ecosystems/morph` | Morph | 🔒 Protected |
+| `/about` | About | Public |
+| `/engineering` | Engineering | Public |
+| `/ecosystems/zarvex` | Zarvex | Public |
+| `/ecosystems/prana` | Prana | Public |
+| `/ecosystems/morph` | Morph | Public |

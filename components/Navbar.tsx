@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Cpu, ChevronRight, ChevronDown, LogOut } from "lucide-react";
+import { Menu, X, ChevronRight, ChevronDown } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-import { useAuth } from "../context/AuthContext.tsx";
+
+const companyLogo = "/logo/company_logo.jpeg";
 
 const ecosystemItems = [
   {
@@ -26,7 +27,7 @@ const ecosystemItems = [
   {
     name: "ARISE",
     path: "/project/arise",
-    subtitle: "Land Maneuvering",
+    subtitle: "Coming Soon",
     color: "text-cyan-400",
   },
 ];
@@ -58,98 +59,26 @@ const itemVariants = {
   visible: { opacity: 1, x: 0 },
 };
 
-/* ─── Auth-aware desktop CTA section ─── */
-const DesktopAuthSection: React.FC = () => {
-  const { currentUser, logout } = useAuth();
-
-  if (currentUser) {
-    return (
-      <div className="hidden md:flex items-center gap-3">
-        <div className="flex items-center gap-3 px-3 py-1.5 rounded-full glass border-white/10">
-          {currentUser.photoURL ? (
-            <img
-              src={currentUser.photoURL}
-              alt=""
-              className="w-7 h-7 rounded-full border border-cyan-500/30"
-              referrerPolicy="no-referrer"
-            />
-          ) : (
-            <div className="w-7 h-7 rounded-full bg-cyan-500/20 border border-cyan-500/30 flex items-center justify-center text-[10px] font-bold text-cyan-400">
-              {currentUser.displayName?.[0] || currentUser.email?.[0] || "?"}
-            </div>
-          )}
-          <span className="text-xs font-medium text-slate-300 max-w-[100px] truncate">
-            {currentUser.displayName || currentUser.email}
-          </span>
-        </div>
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={logout}
-          className="p-2 rounded-lg glass border-white/10 text-slate-400 hover:text-red-400 hover:border-red-400/30 transition-all"
-          title="Sign Out"
-        >
-          <LogOut size={16} />
-        </motion.button>
-      </div>
-    );
-  }
-
+const DesktopContactSection: React.FC = () => {
   return (
-    <div className="hidden md:flex items-center gap-4">
+    <div className="hidden md:flex items-center">
       <Link
-        to="/login"
-        className="px-5 py-2 text-sm font-semibold text-slate-400 hover:text-white transition-colors"
+        to="/contact"
+        className="px-6 py-2.5 text-sm font-bold bg-white text-black rounded-full hover:bg-cyan-400 transition-all flex items-center gap-2 energy-pulse"
       >
-        LOG IN
-      </Link>
-      <button className="px-6 py-2.5 text-sm font-bold bg-white text-black rounded-full hover:bg-cyan-400 transition-all flex items-center gap-2 energy-pulse">
         BUILD NOW <ChevronRight size={16} />
-      </button>
+      </Link>
     </div>
   );
 };
 
-/* ─── Auth-aware mobile CTA section ─── */
-const MobileAuthSection: React.FC = () => {
-  const { currentUser, logout } = useAuth();
-
-  if (currentUser) {
-    return (
-      <div className="flex flex-col gap-3 mt-2">
-        <div className="flex items-center gap-3 px-4 py-3 rounded-xl glass border-white/10">
-          {currentUser.photoURL ? (
-            <img
-              src={currentUser.photoURL}
-              alt=""
-              className="w-8 h-8 rounded-full border border-cyan-500/30"
-              referrerPolicy="no-referrer"
-            />
-          ) : (
-            <div className="w-8 h-8 rounded-full bg-cyan-500/20 border border-cyan-500/30 flex items-center justify-center text-xs font-bold text-cyan-400">
-              {currentUser.displayName?.[0] || currentUser.email?.[0] || "?"}
-            </div>
-          )}
-          <span className="text-sm font-medium text-slate-300 truncate">
-            {currentUser.displayName || currentUser.email}
-          </span>
-        </div>
-        <button
-          onClick={logout}
-          className="w-full py-3 glass border-white/10 text-red-400 font-bold rounded-xl flex items-center justify-center gap-2 hover:bg-red-500/10 transition-all"
-        >
-          <LogOut size={16} /> SIGN OUT
-        </button>
-      </div>
-    );
-  }
-
+const MobileContactSection: React.FC = () => {
   return (
     <Link
-      to="/login"
+      to="/contact"
       className="w-full py-4 bg-white text-black font-bold rounded-xl mt-2 block text-center"
     >
-      LOG IN
+      BUILD NOW
     </Link>
   );
 };
@@ -196,7 +125,7 @@ export const Navbar: React.FC = () => {
   const navItems = [
     { label: "Platforms", href: "/#platforms" },
     { label: "Ecosystems", href: "#", hasDropdown: true },
-    { label: "Engineering", href: "/#engineering" },
+    { label: "Engineering", href: "/engineering" },
     { label: "About Us", href: "/about" },
     { label: "Contact", href: "/contact" },
   ];
@@ -216,16 +145,12 @@ export const Navbar: React.FC = () => {
             }`}
         >
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group cursor-pointer">
-            <motion.div
-              whileHover={{ rotate: 90 }}
-              className="w-10 h-10 bg-cyan-500 rounded-lg flex items-center justify-center neon-glow-cyan transition-transform"
-            >
-              <Cpu className="text-white w-6 h-6" />
-            </motion.div>
-            <span className="text-2xl font-bold tracking-tighter font-heading text-white">
-              Arc<span className="text-cyan-400">Vion</span>
-            </span>
+          <Link to="/" className="group flex items-center cursor-pointer">
+            <img
+              src={companyLogo}
+              alt="ArcVion"
+              className="h-12 w-[154px] rounded-xl object-cover object-left shadow-[0_0_22px_rgba(34,211,238,0.18)] transition-transform duration-300 group-hover:scale-[1.03]"
+            />
           </Link>
 
           {/* Desktop Nav */}
@@ -325,7 +250,7 @@ export const Navbar: React.FC = () => {
           </div>
 
           {/* Desktop CTA */}
-          <DesktopAuthSection />
+          <DesktopContactSection />
 
           {/* Mobile hamburger */}
           <button
@@ -393,7 +318,7 @@ export const Navbar: React.FC = () => {
                 </Link>
               ),
             )}
-            <MobileAuthSection />
+            <MobileContactSection />
           </motion.div>
         )}
       </AnimatePresence>

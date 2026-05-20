@@ -2,6 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, Zap } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export const CallToAction: React.FC = () => {
   return (
@@ -29,12 +30,18 @@ export const CallToAction: React.FC = () => {
             </p>
             
             <div className="flex flex-col md:flex-row gap-6 justify-center">
-              <button className="px-10 py-5 bg-white text-black font-extrabold rounded-2xl flex items-center justify-center gap-3 hover:bg-cyan-400 transition-all hover:scale-105 active:scale-95 shadow-[0_0_40px_rgba(255,255,255,0.1)] group">
+              <Link
+                to="/contact"
+                className="px-10 py-5 bg-white text-black font-extrabold rounded-2xl flex items-center justify-center gap-3 hover:bg-cyan-400 transition-all hover:scale-105 active:scale-95 shadow-[0_0_40px_rgba(255,255,255,0.1)] group"
+              >
                 REQUEST MISSION BRIEFING <ArrowUpRight className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-              </button>
-              <button className="px-10 py-5 glass border-white/20 text-white font-extrabold rounded-2xl hover:bg-white/10 transition-all flex items-center justify-center gap-3">
-                DOWNLOAD SPECS v3.1
-              </button>
+              </Link>
+              <Link
+                to="/contact"
+                className="px-10 py-5 glass border-white/20 text-white font-extrabold rounded-2xl hover:bg-white/10 transition-all flex items-center justify-center gap-3"
+              >
+                REQUEST TECHNICAL DETAILS
+              </Link>
             </div>
           </motion.div>
         </div>

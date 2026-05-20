@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { ArrowUpRight, Cpu, Layers, Radio, Wind, Zap, Camera, Truck, Shield } from 'lucide-react';
+import { ArrowUpRight, Wind, Zap, Camera, Layers, Truck } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const products = [
@@ -10,31 +10,39 @@ const products = [
     sub: "AERIAL ARCHITECTURE",
     desc: "Long-endurance UAV systems with rapid mission reconfiguration payload bays.",
     icon: <Wind className="text-emerald-400" />,
-    img: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&q=80&w=800",
+    img: "/project-photos/image3.png",
+    status: "Platform Page",
+    comingSoon: false,
   },
   {
     id: "aegis",
     name: "AEGIS",
     sub: "INTELLIGENT ATTENDANCE",
-    desc: "Single-camera mechanically controlled vision system for dense environments.",
+    desc: "Single-camera mechanically controlled vision system with 70+ capacity per device.",
     icon: <Camera className="text-blue-400" />,
-    img: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=800",
+    img: "/project-photos/image2.png",
+    status: "Platform Page",
+    comingSoon: false,
   },
   {
     id: "unimount",
     name: "UNIMOUNT",
     sub: "UNIVERSAL SENSOR HUB",
-    desc: "Interchangeable passive cartridges for scalable environmental sensing.",
+    desc: "Swappable sensing cartridges for field, industrial, and environmental monitoring.",
     icon: <Layers className="text-amber-400" />,
-    img: "https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?auto=format&fit=crop&q=80&w=800",
+    img: "/project-photos/image5.png",
+    status: "Platform Page",
+    comingSoon: false,
   },
   {
     id: "arise",
     name: "ARISE",
-    sub: "LAND MANEUVERING",
-    desc: "Intelligent modular platform for robotic bases with hotswap mission roles.",
+    sub: "GROUND MOBILITY",
+    desc: "Future modular mobility layer for payload movement and field inspection.",
     icon: <Truck className="text-cyan-400" />,
-    img: "https://images.unsplash.com/photo-1546776310-eef45dd6d63c?auto=format&fit=crop&q=80&w=800",
+    img: "/robotic_architecture_lab_1779215688019.png",
+    status: "Coming Soon...",
+    comingSoon: true,
   },
 ];
 
@@ -71,7 +79,7 @@ const ProductCard: React.FC<{ product: typeof products[0] }> = ({ product }) => 
       onMouseLeave={handleMouseLeave}
       style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
       whileHover={{ scale: 1.05 }}
-      className="flex-shrink-0 w-[420px] h-[300px] glass rounded-[28px] overflow-hidden group border-white/5 relative mx-6 cursor-pointer transition-shadow hover:shadow-[0_0_60px_rgba(34,211,238,0.2)]"
+      className="flex-shrink-0 w-[320px] sm:w-[420px] h-[320px] glass rounded-[28px] overflow-hidden group border-white/5 relative cursor-pointer transition-shadow hover:shadow-[0_0_60px_rgba(34,211,238,0.2)]"
     >
       <img
         src={product.img}
@@ -99,6 +107,9 @@ const ProductCard: React.FC<{ product: typeof products[0] }> = ({ product }) => 
           <p className="text-slate-400 text-xs mb-5 leading-relaxed line-clamp-2 font-light">
             {product.desc}
           </p>
+          <p className={`mb-5 text-[10px] font-black uppercase tracking-[0.24em] ${product.comingSoon ? "text-amber-300" : "text-cyan-300"}`}>
+            {product.status}
+          </p>
           <Link
             to={`/project/${product.id}`}
             className="inline-flex items-center gap-2 text-[10px] font-bold text-slate-300 bg-white/5 border border-white/10 px-5 py-2 rounded-full hover:bg-cyan-500 hover:text-black hover:border-cyan-500 transition-all uppercase tracking-[0.1em]"
@@ -118,8 +129,7 @@ const ProductCard: React.FC<{ product: typeof products[0] }> = ({ product }) => 
 };
 
 export const ProductShowcase: React.FC = () => {
-  // Duplicate once for seamless loop
-  const list = [...products, ...products];
+  const list = [...products, ...products, ...products];
 
   return (
     <section className="py-24 relative bg-transparent overflow-hidden">
@@ -150,10 +160,10 @@ export const ProductShowcase: React.FC = () => {
 
       <div className="relative py-12 overflow-hidden">
         <motion.div
-          className="flex"
-          animate={{ x: ["0%", "-50%"] }}
+          className="flex w-max gap-8 sm:gap-12"
+          animate={{ x: ["0%", "-33.333333%"] }}
           transition={{
-            duration: 30,
+            duration: 34,
             ease: "linear",
             repeat: Infinity,
           }}

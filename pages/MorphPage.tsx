@@ -66,7 +66,7 @@ const MorphPage: React.FC = () => {
       icon: <ShieldCheck size={22} className="text-white" />,
       title: 'Ruggedized Build',
       description:
-        'IP68-rated chassis with MIL-STD-810G certification. Operational from -40°C to +60°C with integrated thermal management and shock absorption.',
+        'Rugged chassis architecture designed for dust, vibration, impact, and harsh field conditions with integrated thermal management and shock absorption.',
     },
   ];
 
@@ -110,12 +110,18 @@ const MorphPage: React.FC = () => {
 
           <ScrollReveal delay={0.3}>
             <div className="flex flex-col sm:flex-row gap-5 justify-center">
-              <button className="px-10 py-4 bg-white text-black font-extrabold rounded-2xl flex items-center justify-center gap-3 hover:bg-blue-400 transition-all hover:scale-105 active:scale-95 shadow-[0_0_40px_rgba(255,255,255,0.08)] group">
+              <Link
+                to="/contact"
+                className="px-10 py-4 bg-white text-black font-extrabold rounded-2xl flex items-center justify-center gap-3 hover:bg-blue-400 transition-all hover:scale-105 active:scale-95 shadow-[0_0_40px_rgba(255,255,255,0.08)] group"
+              >
                 REQUEST ACCESS <ArrowUpRight className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" size={18} />
-              </button>
-              <button className="px-10 py-4 glass border-white/20 text-white font-extrabold rounded-2xl hover:bg-white/10 transition-all">
-                CHASSIS SPECS v3.2
-              </button>
+              </Link>
+              <Link
+                to="/contact"
+                className="px-10 py-4 glass border-white/20 text-white font-extrabold rounded-2xl hover:bg-white/10 transition-all"
+              >
+                REQUEST CHASSIS SPECS
+              </Link>
             </div>
           </ScrollReveal>
         </div>
@@ -163,10 +169,10 @@ const MorphPage: React.FC = () => {
           <ScrollReveal>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
               {[
-                { value: '500kg', label: 'Max Payload' },
-                { value: '72h', label: 'Endurance' },
-                { value: 'IP68', label: 'Protection' },
-                { value: '<60s', label: 'Reconfig Time' },
+                { value: 'Heavy', label: 'Payload Ready' },
+                { value: 'Field', label: 'Endurance Focus' },
+                { value: 'Rugged', label: 'Protection Design' },
+                { value: 'Rapid', label: 'Reconfig Time' },
               ].map((stat, i) => (
                 <motion.div
                   key={i}

@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowUpRight, CheckCircle2, ChevronLeft } from "lucide-react";
+import { ArrowUpRight, CheckCircle2, ChevronLeft, Clock3, Mail } from "lucide-react";
 import { PageTransition } from "../components/PageTransition.tsx";
 import { ScrollReveal } from "../components/ScrollReveal.tsx";
 import { projectsData } from "../data/projectsData.ts";
@@ -33,7 +33,10 @@ const ProjectPage: React.FC = () => {
     icon,
     accentColor,
     glowColor,
-    img,
+    heroImg,
+    gallery,
+    status,
+    highlight,
     stats,
   } = project;
 
@@ -88,8 +91,7 @@ const ProjectPage: React.FC = () => {
 
   return (
     <PageTransition>
-      {/* ═══════ HERO SECTION ═══════ */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#020617] pt-32 pb-24">
+      <section className="relative min-h-screen overflow-hidden bg-[#020617] pt-32 pb-24">
         {/* Background Decor */}
         <div className="absolute inset-0 z-0">
           <div
@@ -115,62 +117,99 @@ const ProjectPage: React.FC = () => {
           style={{ backgroundColor: style.glow }}
         />
 
-        <div className="relative z-10 text-center max-w-5xl px-6">
-          <ScrollReveal>
-            <Link
-              to="/"
-              className="inline-flex items-center gap-2 text-xs font-bold text-slate-500 hover:text-white transition-colors uppercase tracking-[0.2em] mb-12"
-            >
-              <ChevronLeft size={14} /> Back to Ecosystem
-            </Link>
-          </ScrollReveal>
+        <div className="relative z-10 mx-auto grid max-w-7xl gap-14 px-6 pt-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <div>
+            <ScrollReveal>
+              <Link
+                to="/"
+                className="mb-10 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-slate-500 transition-colors hover:text-white"
+              >
+                <ChevronLeft size={14} /> Back to Platforms
+              </Link>
+            </ScrollReveal>
 
-          <ScrollReveal delay={0.1}>
-            <motion.div
-              className={`mb-6 inline-flex items-center gap-2 px-5 py-2 rounded-full border ${style.border} glass text-[11px] font-bold tracking-[0.4em] ${style.text} uppercase shadow-lg`}
-            >
-              {React.cloneElement(icon as React.ReactElement, {
-                size: 14,
-                className: `${style.text} animate-pulse`,
-              })}{" "}
-              {sub}
-            </motion.div>
-          </ScrollReveal>
+            <ScrollReveal delay={0.1}>
+              <motion.div
+                className={`mb-6 inline-flex items-center gap-2 rounded-full border ${style.border} glass px-5 py-2 text-[11px] font-bold uppercase tracking-[0.35em] ${style.text} shadow-lg`}
+              >
+                {React.cloneElement(icon as React.ReactElement, {
+                  size: 14,
+                  className: `${style.text} animate-pulse`,
+                })}{" "}
+                {status === "coming-soon" ? "Coming Soon" : sub}
+              </motion.div>
+            </ScrollReveal>
+
+            <ScrollReveal delay={0.2}>
+              <h1 className="mb-8 font-heading text-7xl font-black leading-[0.85] tracking-tighter md:text-9xl">
+                <span className="text-white drop-shadow-2xl">
+                  {name.slice(0, -2)}
+                </span>
+                <span
+                  className={`bg-gradient-to-r ${style.bg} bg-clip-text text-transparent`}
+                >
+                  {name.slice(-2)}
+                </span>
+              </h1>
+            </ScrollReveal>
+
+            <ScrollReveal delay={0.3}>
+              <p className="mb-10 max-w-2xl text-xl font-light leading-relaxed text-slate-400 md:text-2xl">
+                {highlight}
+              </p>
+            </ScrollReveal>
+
+            <ScrollReveal delay={0.4}>
+              <div className="flex flex-col gap-4 sm:flex-row">
+                <Link
+                  to="/contact"
+                  className="group flex items-center justify-center gap-3 rounded-2xl bg-white px-8 py-4 font-extrabold text-black shadow-xl transition-all hover:scale-105 hover:bg-cyan-400 active:scale-95"
+                >
+                  {status === "coming-soon" ? "GET UPDATES" : "REQUEST DEPLOYMENT"}
+                  <ArrowUpRight
+                    className="transition-transform group-hover:-translate-y-1 group-hover:translate-x-1"
+                    size={18}
+                  />
+                </Link>
+                <Link
+                  to={
+                    status === "coming-soon"
+                      ? "/coming-soon/arise"
+                      : `/project/${project.id}/full-details`
+                  }
+                  className={`flex items-center justify-center gap-3 rounded-2xl border ${style.border} bg-white/[0.04] px-6 py-4 text-sm font-bold uppercase tracking-[0.18em] ${style.text} transition-all hover:bg-white/[0.08] hover:text-white`}
+                >
+                  {status === "coming-soon" ? <Clock3 size={18} /> : <Mail size={18} />}
+                  {status === "coming-soon"
+                    ? "Reveal In Progress"
+                    : "Contact For Full Details"}
+                </Link>
+              </div>
+            </ScrollReveal>
+          </div>
 
           <ScrollReveal delay={0.2}>
-            <h1 className="text-7xl md:text-9xl font-black font-heading tracking-tighter leading-[0.85] mb-8">
-              <span className="text-white drop-shadow-2xl">
-                {name.slice(0, -2)}
-              </span>
-              <span
-                className={`bg-gradient-to-r ${style.bg} bg-clip-text text-transparent`}
-              >
-                {name.slice(-2)}
-              </span>
-            </h1>
-          </ScrollReveal>
-
-          <ScrollReveal delay={0.3}>
-            <p className="text-xl md:text-2xl text-slate-400 mb-12 max-w-3xl mx-auto leading-relaxed font-light">
-              {fullDesc.split(".")[0]}.{" "}
-              <span className="text-white font-medium italic underline decoration-cyan-500/30 underline-offset-4">
-                Mission-ready performance.
-              </span>
-            </p>
-          </ScrollReveal>
-
-          <ScrollReveal delay={0.4}>
-            <div className="flex flex-col sm:flex-row gap-5 justify-center">
-              <Link
-                to="/contact"
-                className="px-10 py-4 bg-white text-black font-extrabold rounded-2xl flex items-center justify-center gap-3 hover:bg-cyan-400 transition-all hover:scale-105 active:scale-95 shadow-xl group"
-              >
-                REQUEST DEPLOYMENT{" "}
-                <ArrowUpRight
-                  className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"
-                  size={18}
+            <div className="relative">
+              <div
+                className="absolute -inset-5 rounded-[2.5rem] blur-2xl"
+                style={{ backgroundColor: glowColor }}
+              />
+              <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950 shadow-[0_40px_120px_rgba(0,0,0,0.45)]">
+                <img
+                  src={heroImg}
+                  alt={`${name} platform visual`}
+                  className="h-[360px] w-full object-cover opacity-90 md:h-[560px]"
                 />
-              </Link>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-[#020617]/20 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <p className={`mb-2 text-[10px] font-black uppercase tracking-[0.35em] ${style.text}`}>
+                    ArcVion Platform
+                  </p>
+                  <p className="max-w-xl text-sm leading-relaxed text-slate-300">
+                    {fullDesc.split(".")[0]}.
+                  </p>
+                </div>
+              </div>
             </div>
           </ScrollReveal>
         </div>
@@ -180,7 +219,7 @@ const ProjectPage: React.FC = () => {
 
       {/* ═══════ CONTENT SECTION ═══════ */}
       <section className="py-24 bg-[#020617] relative">
-        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-20">
+        <div className="max-w-7xl mx-auto px-6 grid gap-20 md:grid-cols-[0.95fr_1.05fr]">
           <ScrollReveal>
             <div>
               <h2 className="text-3xl font-black uppercase tracking-tighter mb-8 bg-gradient-to-r from-white to-slate-500 bg-clip-text text-transparent">
@@ -190,11 +229,21 @@ const ProjectPage: React.FC = () => {
                 {fullDesc}
               </p>
 
-              <img
-                src={img}
-                alt={name}
-                className="w-full h-[400px] object-cover rounded-3xl grayscale hover:grayscale-0 transition-all duration-700 border border-white/5"
-              />
+              <div className="grid grid-cols-2 gap-4">
+                {gallery.slice(0, 2).map((image, i) => (
+                  <div
+                    key={image}
+                    className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04]"
+                  >
+                    <img
+                      src={image}
+                      alt={`${name} detail ${i + 1}`}
+                      className="h-56 w-full object-cover opacity-75 transition duration-700 group-hover:scale-110 group-hover:opacity-100"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#020617]/70 to-transparent" />
+                  </div>
+                ))}
+              </div>
             </div>
           </ScrollReveal>
 
@@ -250,6 +299,48 @@ const ProjectPage: React.FC = () => {
               ))}
             </div>
           </ScrollReveal>
+        </div>
+      </section>
+
+      <section className="relative bg-[#020617] py-24">
+        <div className="mx-auto max-w-7xl px-6">
+          <ScrollReveal>
+            <div className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+              <div>
+                <p className={`mb-3 text-[10px] font-black uppercase tracking-[0.4em] ${style.text}`}>
+                  Visual System
+                </p>
+                <h2 className="font-heading text-4xl font-black uppercase tracking-tighter text-white md:text-6xl">
+                  Built Around The Mission.
+                </h2>
+              </div>
+              <p className="max-w-lg text-sm leading-relaxed text-slate-500">
+                These visuals use the provided project assets and keep each
+                platform page grounded in the actual ArcVion hardware direction.
+              </p>
+            </div>
+          </ScrollReveal>
+
+          <div className="grid gap-5 md:grid-cols-3">
+            {gallery.map((image, i) => (
+              <ScrollReveal key={`${image}-${i}`} delay={i * 0.08}>
+                <div className="group relative h-80 overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.035]">
+                  <img
+                    src={image}
+                    alt={`${name} gallery ${i + 1}`}
+                    className="h-full w-full object-cover opacity-75 transition duration-700 group-hover:scale-110 group-hover:opacity-100"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-transparent" />
+                  <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between">
+                    <span className="text-[10px] font-black uppercase tracking-[0.25em] text-white">
+                      {name} / 0{i + 1}
+                    </span>
+                    <span className={`h-2 w-2 rounded-full ${style.fill}`} />
+                  </div>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
         </div>
       </section>
     </PageTransition>

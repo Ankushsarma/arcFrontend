@@ -1,15 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import {
-  Target,
   Cpu,
   Users,
   Binary,
   ArrowRight,
   Zap,
-  ShieldCheck,
-  Globe,
+  Linkedin,
+  Sparkles,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 import { PageTransition } from "../components/PageTransition.tsx";
 
 const ScrollReveal: React.FC<{ children: React.ReactNode; delay?: number }> = ({
@@ -26,27 +26,73 @@ const ScrollReveal: React.FC<{ children: React.ReactNode; delay?: number }> = ({
   </motion.div>
 );
 
+const TeamPhoto: React.FC<{
+  name: string;
+  image: string;
+  gradient: string;
+}> = ({ name, image, gradient }) => {
+  const [hasError, setHasError] = useState(false);
+  const initial = name.charAt(0);
+
+  return (
+    <div className="relative mx-auto mb-6 h-36 w-36">
+      <div
+        className={`absolute -inset-1.5 rounded-[2rem] bg-gradient-to-br ${gradient} opacity-55 blur-md transition-opacity duration-500 group-hover:opacity-95`}
+      />
+      <div className="relative h-full w-full overflow-hidden rounded-[1.75rem] border border-white/15 bg-slate-950 shadow-[0_22px_55px_rgba(0,0,0,0.28)]">
+        {!hasError ? (
+          <img
+            src={image}
+            alt={name}
+            onError={() => setHasError(true)}
+            className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+          />
+        ) : (
+          <div
+            className={`flex h-full w-full items-center justify-center bg-gradient-to-br ${gradient} text-4xl font-black text-black`}
+          >
+            {initial}
+          </div>
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#020617]/55 via-transparent to-white/5" />
+      </div>
+    </div>
+  );
+};
+
 const AboutPage: React.FC = () => {
   const founders = [
     {
       name: "Sai Mithil K",
       role: "Founder",
+      focus: "Product vision & systems strategy",
       color: "from-cyan-400 to-blue-500",
+      image: "/team/mithil.jpg",
+      linkedin: "https://www.linkedin.com/in/sai-mithil-k-98157532a",
     },
     {
       name: "Ritam Pandey",
       role: "Founder",
+      focus: "Robotics architecture & execution",
       color: "from-blue-400 to-emerald-500",
-    },
-    {
-      name: "Shivam Yadav",
-      role: "Founding Member",
-      color: "from-purple-400 to-cyan-500",
+      image: "/team/ritam.jpg",
+      linkedin: "https://www.linkedin.com/in/ritam-pandey-8912a93b8",
     },
     {
       name: "Pawan Kalyan",
       role: "Founding Member",
+      focus: "Embedded systems & prototyping",
       color: "from-emerald-400 to-cyan-500",
+      image: "/team/pawan.jpg",
+      linkedin: "https://www.linkedin.com/in/pawan-kalyan-pendyala-59339b28b",
+    },
+    {
+      name: "Shivam Yadav",
+      role: "Founding Member",
+      focus: "Platform engineering & build support",
+      color: "from-purple-400 to-cyan-500",
+      image: "/team/shivam.jpg",
+      linkedin: "https://www.linkedin.com/in/shivam-yadav-280229277",
     },
   ];
 
@@ -60,14 +106,14 @@ const AboutPage: React.FC = () => {
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           {/* Hero Section */}
           <section className="mb-32">
-            <div className="text-center max-w-4xl mx-auto">
+            <div className="text-center max-w-6xl mx-auto">
               <ScrollReveal>
                 <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-cyan-500/20 glass text-[10px] font-bold tracking-[0.5em] text-cyan-400 uppercase mb-8">
                   <Binary size={14} /> Our Infrastructure
                 </div>
-                <h1 className="text-6xl md:text-8xl font-black font-heading mb-8 tracking-tighter text-white leading-tight">
+                <h1 className="text-5xl sm:text-6xl md:text-7xl xl:text-8xl font-black font-heading mb-8 text-white leading-[1.02] overflow-visible">
                   ENGINEERING THE <br />
-                  <span className="animate-gradient-text italic">
+                  <span className="inline-block animate-gradient-text italic overflow-visible px-2 pb-1">
                     NEXT EVOLUTION
                   </span>
                 </h1>
@@ -91,18 +137,18 @@ const AboutPage: React.FC = () => {
                 <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-[2.5rem] blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
                 <div className="relative rounded-[2rem] overflow-hidden border border-white/10 glass bg-black/40 aspect-[4/3]">
                   <img
-                    src="/robotic_architecture_lab_1779215688019.png"
-                    alt="Research Lab"
-                    className="w-full h-full object-cover opacity-80"
+                    src="/project-photos/image2.png"
+                    alt="ArcVion prototype camera assembly"
+                    className="w-full h-full object-cover object-center opacity-90"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent"></div>
                   <div className="absolute bottom-8 left-8 right-8">
                     <p className="text-white font-mono text-xs tracking-widest uppercase mb-2">
-                      Location: R&D Core
+                      Prototype Hardware
                     </p>
                     <p className="text-slate-400 text-sm italic">
-                      Simulating multi-environment adaptability for ZARVEX
-                      systems.
+                      Real camera and sensing mount used in ArcVion system
+                      experiments.
                     </p>
                   </div>
                 </div>
@@ -126,9 +172,9 @@ const AboutPage: React.FC = () => {
                   and{" "}
                   <span className="text-white font-semibold">Ritam Pandey</span>
                   , along with founding members{" "}
-                  <span className="text-white font-semibold">Shivam Yadav</span>{" "}
+                  <span className="text-white font-semibold">Pawan Kalyan</span>{" "}
                   and{" "}
-                  <span className="text-white font-semibold">Pawan Kalyan</span>
+                  <span className="text-white font-semibold">Shivam Yadav</span>
                   , ArcVion operates with a clear vision: solving the rigidity
                   of modern hardware.
                 </p>
@@ -205,7 +251,7 @@ const AboutPage: React.FC = () => {
           <section className="mb-40">
             <ScrollReveal>
               <div className="text-center mb-20">
-                <h2 className="text-4xl md:text-6xl font-black font-heading text-white mb-4 tracking-tighter">
+                <h2 className="text-4xl md:text-6xl font-black font-heading text-white mb-4">
                   THE CORE ARCHITECTS
                 </h2>
                 <div className="h-1 w-24 bg-cyan-500 mx-auto rounded-full"></div>
@@ -215,32 +261,44 @@ const AboutPage: React.FC = () => {
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {founders.map((person, i) => (
                 <ScrollReveal key={i} delay={i * 0.1}>
-                  <div className="group relative">
+                  <div className="group relative h-full">
                     <div
-                      className={`absolute inset-0 bg-gradient-to-br ${person.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-[2rem]`}
+                      className={`absolute -inset-px rounded-[2rem] bg-gradient-to-br ${person.color} opacity-20 blur-sm transition-opacity duration-500 group-hover:opacity-55`}
                     ></div>
-                    <div className="relative glass p-8 rounded-[2rem] border border-white/5 text-center hover:border-white/20 transition-all duration-300">
+                    <div className="relative flex min-h-[410px] flex-col overflow-hidden rounded-[2rem] border border-white/10 bg-[#071120]/85 p-7 text-center shadow-[0_28px_80px_rgba(0,0,0,0.24)] transition-all duration-300 group-hover:-translate-y-1 group-hover:border-cyan-400/35">
+                      <div className="absolute inset-0 grid-pattern opacity-[0.04]" />
                       <div
-                        className={`w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br ${person.color} flex items-center justify-center text-black font-bold text-2xl`}
-                      >
-                        {person.name.charAt(0)}
-                      </div>
-                      <h4 className="text-xl font-bold text-white mb-2">
+                        className={`absolute inset-x-0 top-0 h-28 bg-gradient-to-b ${person.color} opacity-10`}
+                      />
+                      <div className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent" />
+                      <TeamPhoto
+                        name={person.name}
+                        image={person.image}
+                        gradient={person.color}
+                      />
+                      <h4 className="relative text-2xl font-bold text-white mb-2">
                         {person.name}
                       </h4>
-                      <p className="text-cyan-400 text-xs font-mono tracking-widest uppercase mb-6">
+                      <p className="relative mx-auto mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-cyan-300">
+                        <Sparkles size={12} />
                         {person.role}
                       </p>
-                      <div className="flex justify-center gap-4 text-slate-500">
-                        <Globe
-                          size={16}
-                          className="hover:text-white cursor-pointer transition-colors"
-                        />
-                        <ArrowRight
-                          size={16}
-                          className="-rotate-45 hover:text-white cursor-pointer transition-colors"
-                        />
-                      </div>
+                      <p className="relative mx-auto mb-7 max-w-[15rem] text-sm leading-relaxed text-slate-400">
+                        {person.focus}
+                      </p>
+                      <a
+                        href={person.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${person.name} LinkedIn profile`}
+                        className="relative mx-auto mt-auto inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.06] px-5 py-2.5 text-slate-300 transition-all hover:border-cyan-400/45 hover:bg-cyan-400/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-cyan-400/50"
+                      >
+                        <Linkedin size={16} />
+                        <span className="text-[10px] font-bold uppercase tracking-[0.18em]">
+                          LinkedIn
+                        </span>
+                        <ArrowRight size={14} className="-rotate-45" />
+                      </a>
                     </div>
                   </div>
                 </ScrollReveal>
@@ -253,12 +311,15 @@ const AboutPage: React.FC = () => {
             <ScrollReveal>
               <div className="relative inline-block group">
                 <div className="absolute -inset-4 bg-cyan-500/20 rounded-full blur-xl group-hover:bg-cyan-500/40 transition-all"></div>
-                <button className="relative px-12 py-5 bg-white text-black font-black rounded-2xl flex items-center justify-center gap-3 hover:bg-cyan-400 transition-all hover:scale-105 active:scale-95 shadow-2xl">
+                <Link
+                  to="/contact"
+                  className="relative flex items-center justify-center gap-3 rounded-2xl bg-white px-12 py-5 font-black text-black shadow-2xl transition-all hover:scale-105 hover:bg-cyan-400 active:scale-95"
+                >
                   WORK WITH US <ArrowRight size={20} />
-                </button>
+                </Link>
               </div>
               <p className="mt-8 text-slate-500 text-sm font-mono tracking-widest">
-                EST. 2024 • COORDINATED DEFENSE • ADAPTIVE INTELLIGENCE
+                EST. 2026 • ADAPTIVE HARDWARE • INTELLIGENT SYSTEMS
               </p>
             </ScrollReveal>
           </section>
