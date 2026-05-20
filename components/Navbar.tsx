@@ -84,12 +84,9 @@ const MobileContactSection: React.FC = () => {
 };
 
 export const Navbar: React.FC = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileEcoOpen, setIsMobileEcoOpen] = useState(false);
-  const lastScrollY = useRef(0);
   const dropdownTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const location = useLocation();
 
@@ -97,21 +94,6 @@ export const Navbar: React.FC = () => {
     setIsMobileMenuOpen(false);
     setIsDropdownOpen(false);
   }, [location]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      setIsScrolled(currentScrollY > 20);
-      if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
-        setIsVisible(false);
-      } else {
-        setIsVisible(true);
-      }
-      lastScrollY.current = currentScrollY;
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const handleDropdownEnter = () => {
     if (dropdownTimeout.current) clearTimeout(dropdownTimeout.current);
@@ -133,16 +115,12 @@ export const Navbar: React.FC = () => {
   return (
     <motion.nav
       initial={{ y: 0 }}
-      animate={{ y: isVisible ? 0 : -100 }}
-      transition={{ duration: 0.4, ease: "easeInOut" }}
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled ? "py-3" : "py-6"}`}
+      animate={{ y: 0 }}
+      className="fixed top-0 left-0 w-full z-50 py-6"
     >
       <div className="max-w-7xl mx-auto px-6">
         <div
-          className={`glass rounded-2xl flex items-center justify-between px-6 py-3 transition-all ${isScrolled
-              ? "shadow-[0_20px_50px_rgba(0,0,0,0.5)] border-white/20"
-              : "border-white/10"
-            }`}
+          className="glass rounded-2xl flex items-center justify-between border-white/10 px-6 py-3 shadow-[0_20px_50px_rgba(0,0,0,0.38)]"
         >
           {/* Logo */}
           <Link to="/" className="group flex items-center cursor-pointer">

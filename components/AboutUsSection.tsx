@@ -100,110 +100,111 @@ const ArchitectureFlowVisual: React.FC = () => {
     {
       label: "Base",
       detail: "Frame, mounting points, and shared mechanical interface",
+      side: "left",
     },
     {
       label: "Power",
       detail: "Battery, regulation, protection, and runtime monitoring",
+      side: "left",
     },
     {
       label: "Compute",
       detail: "Edge control, sensing logic, and onboard decisions",
+      side: "right",
     },
     {
       label: "Payload",
       detail: "Mission tools, sensors, cameras, and field modules",
+      side: "right",
     },
   ];
+  const leftModules = modules.filter((module) => module.side === "left");
+  const rightModules = modules.filter((module) => module.side === "right");
 
   return (
     <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#030914] shadow-[0_24px_80px_rgba(0,0,0,0.32)]">
-      <div className="relative min-h-[360px] overflow-hidden p-6">
+      <div className="relative min-h-[520px] overflow-hidden p-6 md:p-8">
         <div className="absolute inset-0 grid-pattern opacity-[0.05]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(34,211,238,0.14),transparent_52%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_48%,rgba(34,211,238,0.18),transparent_54%)]" />
 
-        <div className="relative z-10 grid min-h-[312px] gap-4 lg:grid-cols-[1fr_auto_1fr] lg:items-center">
-          <div className="grid gap-4">
-            {modules.slice(0, 2).map((module, i) => (
+        <div className="relative z-10 grid min-h-[456px] gap-6 lg:grid-cols-[1fr_220px_1fr] lg:items-center">
+          <div className="grid gap-6">
+            {leftModules.map((module, i) => (
               <motion.div
                 key={module.label}
-                className="rounded-2xl border border-cyan-400/15 bg-slate-950/85 p-5 shadow-[0_18px_50px_rgba(0,0,0,0.22)] backdrop-blur-xl"
-                animate={{ y: [0, -4, 0] }}
+                className="rounded-2xl border border-cyan-400/20 bg-slate-950/85 p-6 shadow-[0_18px_50px_rgba(0,0,0,0.24)] backdrop-blur-xl"
+                animate={{ y: [0, -5, 0] }}
                 transition={{
-                  duration: 3.2,
+                  duration: 3.4,
                   repeat: Infinity,
                   ease: "easeInOut",
                   delay: i * 0.18,
                 }}
               >
-                <div className="mb-4 flex items-center gap-3">
-                  <div className="h-2.5 w-2.5 rounded-full bg-cyan-300 shadow-[0_0_16px_rgba(34,211,238,0.75)]" />
-                  <p className="text-[11px] font-black uppercase tracking-[0.28em] text-white">
+                <div className="mb-5 flex items-center gap-4">
+                  <div className="h-3 w-3 rounded-full bg-cyan-300 shadow-[0_0_18px_rgba(34,211,238,0.85)]" />
+                  <p className="text-[12px] font-black uppercase tracking-[0.34em] text-white">
                     {module.label}
                   </p>
                 </div>
-                <p className="text-sm leading-relaxed text-slate-400">
+                <p className="text-lg leading-relaxed text-slate-400">
                   {module.detail}
                 </p>
               </motion.div>
             ))}
           </div>
 
-          <div className="relative mx-auto flex h-full min-h-24 w-full items-center justify-center lg:w-32">
-            <div className="absolute left-1/2 top-0 hidden h-full w-px -translate-x-1/2 bg-cyan-400/15 lg:block" />
-            <div className="absolute left-0 right-0 top-1/2 h-px -translate-y-1/2 bg-cyan-400/15" />
+          <div className="relative mx-auto flex h-56 w-full items-center justify-center lg:h-full">
+            <div className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-cyan-400/20" />
+            <div className="absolute left-0 right-0 top-1/2 h-px -translate-y-1/2 bg-cyan-400/20" />
             <motion.div
-              className="relative flex h-28 w-28 items-center justify-center rounded-full border border-cyan-300/35 bg-cyan-400/10 text-center shadow-[0_0_50px_rgba(34,211,238,0.16)]"
-              animate={{ boxShadow: [
-                "0 0 32px rgba(34,211,238,0.12)",
-                "0 0 58px rgba(34,211,238,0.24)",
-                "0 0 32px rgba(34,211,238,0.12)",
-              ] }}
+              className="relative flex h-36 w-36 items-center justify-center rounded-full border border-cyan-300/35 bg-cyan-400/10 text-center shadow-[0_0_55px_rgba(34,211,238,0.2)]"
+              animate={{
+                boxShadow: [
+                  "0 0 34px rgba(34,211,238,0.14)",
+                  "0 0 62px rgba(34,211,238,0.28)",
+                  "0 0 34px rgba(34,211,238,0.14)",
+                ],
+              }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             >
               <div>
-                <div className="mx-auto mb-3 h-3 w-3 rounded-full bg-cyan-200 shadow-[0_0_18px_rgba(165,243,252,0.9)]" />
-                <p className="text-[10px] font-black uppercase tracking-[0.22em] text-cyan-100">
+                <div className="mx-auto mb-4 h-4 w-4 rounded-full bg-cyan-200 shadow-[0_0_18px_rgba(165,243,252,0.9)]" />
+                <p className="text-[12px] font-black uppercase tracking-[0.28em] text-cyan-100">
                   Reusable
                 </p>
-                <p className="text-[10px] font-black uppercase tracking-[0.22em] text-cyan-100">
+                <p className="text-[12px] font-black uppercase tracking-[0.28em] text-cyan-100">
                   Core
                 </p>
               </div>
             </motion.div>
           </div>
 
-          <div className="grid gap-4">
-            {modules.slice(2).map((module, i) => (
+          <div className="grid gap-6">
+            {rightModules.map((module, i) => (
               <motion.div
                 key={module.label}
-                className="rounded-2xl border border-cyan-400/15 bg-slate-950/85 p-5 shadow-[0_18px_50px_rgba(0,0,0,0.22)] backdrop-blur-xl"
-                animate={{ y: [0, -4, 0] }}
+                className="rounded-2xl border border-cyan-400/20 bg-slate-950/85 p-6 shadow-[0_18px_50px_rgba(0,0,0,0.24)] backdrop-blur-xl"
+                animate={{ y: [0, -5, 0] }}
                 transition={{
-                  duration: 3.2,
+                  duration: 3.4,
                   repeat: Infinity,
                   ease: "easeInOut",
                   delay: (i + 2) * 0.18,
                 }}
               >
-                <div className="mb-4 flex items-center gap-3">
-                  <div className="h-2.5 w-2.5 rounded-full bg-emerald-300 shadow-[0_0_16px_rgba(52,211,153,0.75)]" />
-                  <p className="text-[11px] font-black uppercase tracking-[0.28em] text-white">
+                <div className="mb-5 flex items-center gap-4">
+                  <div className="h-3 w-3 rounded-full bg-emerald-300 shadow-[0_0_18px_rgba(52,211,153,0.85)]" />
+                  <p className="text-[12px] font-black uppercase tracking-[0.34em] text-white">
                     {module.label}
                   </p>
                 </div>
-                <p className="text-sm leading-relaxed text-slate-400">
+                <p className="text-lg leading-relaxed text-slate-400">
                   {module.detail}
                 </p>
               </motion.div>
             ))}
           </div>
-
-          <motion.div
-            className="pointer-events-none absolute left-[12%] right-[12%] top-1/2 hidden h-px -translate-y-1/2 bg-gradient-to-r from-transparent via-cyan-300 to-transparent lg:block"
-            animate={{ opacity: [0.28, 0.9, 0.28] }}
-            transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
-          >
-          </motion.div>
         </div>
       </div>
       <div className="border-t border-cyan-400/10 bg-[#020617]/80 p-6">

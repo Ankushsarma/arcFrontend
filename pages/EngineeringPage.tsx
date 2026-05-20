@@ -231,7 +231,7 @@ const pipelineSteps = [
 const systemCards = [
   {
     tag: "Modular platforms",
-    title: "UniMount - ZARVEX - AEGIS",
+    title: "UniMount - ZARVEX - ARISE",
     problem:
       "Industries deploy separate machines for surveillance, sensing, logistics, and inspection. Each machine brings its own maintenance, training, and cost burden.",
     solution:
