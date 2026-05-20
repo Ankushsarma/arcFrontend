@@ -268,7 +268,7 @@ export const Hero: React.FC<HeroProps> = ({ scrollY }) => {
           <span className="text-white font-black">
             interchangeable hardware modules.
           </span>{" "}
-          Reconfigure in seconds, deploy for weeks.
+          Reconfigure in seconds, operate across domains.
         </motion.p>
 
         <motion.div

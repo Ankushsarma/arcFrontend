@@ -195,11 +195,25 @@ const ProjectPage: React.FC = () => {
                 style={{ backgroundColor: glowColor }}
               />
               <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950 shadow-[0_40px_120px_rgba(0,0,0,0.45)]">
-                <img
-                  src={heroImg}
-                  alt={`${name} platform visual`}
-                  className="h-[360px] w-full object-cover opacity-90 md:h-[560px]"
-                />
+                {heroImg ? (
+                  <img
+                    src={heroImg}
+                    alt={`${name} platform visual`}
+                    className="h-[360px] w-full object-cover opacity-90 md:h-[560px]"
+                  />
+                ) : (
+                  <div className="relative h-[360px] w-full overflow-hidden bg-[radial-gradient(circle_at_50%_35%,rgba(59,130,246,0.24),transparent_45%),linear-gradient(135deg,rgba(34,211,238,0.1),transparent_48%,rgba(59,130,246,0.14))] md:h-[560px]">
+                    <div className="absolute inset-0 grid-pattern opacity-[0.08]" />
+                    <div className="absolute left-1/2 top-1/2 grid w-[70%] max-w-md -translate-x-1/2 -translate-y-1/2 grid-cols-3 gap-4">
+                      {Array.from({ length: 9 }).map((_, i) => (
+                        <div
+                          key={i}
+                          className="aspect-square rounded-2xl border border-blue-300/20 bg-blue-300/10 shadow-[0_0_30px_rgba(59,130,246,0.12)]"
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-[#020617]/20 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-6">
                   <p className={`mb-2 text-[10px] font-black uppercase tracking-[0.35em] ${style.text}`}>
@@ -228,22 +242,6 @@ const ProjectPage: React.FC = () => {
               <p className="text-slate-400 leading-relaxed text-lg font-light mb-8 italic border-l-2 border-cyan-500/20 pl-8">
                 {fullDesc}
               </p>
-
-              <div className="grid grid-cols-2 gap-4">
-                {gallery.slice(0, 2).map((image, i) => (
-                  <div
-                    key={image}
-                    className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04]"
-                  >
-                    <img
-                      src={image}
-                      alt={`${name} detail ${i + 1}`}
-                      className="h-56 w-full object-cover opacity-75 transition duration-700 group-hover:scale-110 group-hover:opacity-100"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#020617]/70 to-transparent" />
-                  </div>
-                ))}
-              </div>
             </div>
           </ScrollReveal>
 

@@ -67,11 +67,7 @@ export const projectsData: Record<string, ProjectData> = {
     glowColor: "rgba(59, 130, 246, 0.2)",
     img: "/project-photos/image2.png",
     heroImg: "/project-photos/image2.png",
-    gallery: [
-      "/project-photos/image2.png",
-      "/project-photos/image1.png",
-      "/project-photos/image7.png",
-    ],
+    gallery: ["/project-photos/image2.png", "/project-photos/image1.png"],
     status: "active",
     highlight: "A focused identity pipeline for faster, cleaner attendance capture in dense learning spaces.",
     stats: [

@@ -50,11 +50,15 @@ export const Ecosystems: React.FC = () => {
               whileHover={{ y: -10 }}
               className="group relative h-[600px] rounded-3xl overflow-hidden glass border-white/5"
             >
-              <img 
-                src={eco.image} 
-                className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:scale-110 group-hover:opacity-60 transition-all duration-700" 
-                alt={eco.title}
-              />
+              {eco.image ? (
+                <img
+                  src={eco.image}
+                  className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:scale-110 group-hover:opacity-60 transition-all duration-700"
+                  alt={eco.title}
+                />
+              ) : (
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_32%,rgba(168,85,247,0.28),transparent_46%),linear-gradient(135deg,rgba(34,211,238,0.12),transparent_48%,rgba(236,72,153,0.12))] opacity-80 transition-opacity duration-700 group-hover:opacity-100" />
+              )}
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
               
               <div className="absolute inset-0 p-8 flex flex-col justify-end">

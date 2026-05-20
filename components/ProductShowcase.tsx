@@ -81,11 +81,15 @@ const ProductCard: React.FC<{ product: typeof products[0] }> = ({ product }) => 
       whileHover={{ scale: 1.05 }}
       className="flex-shrink-0 w-[320px] sm:w-[420px] h-[320px] glass rounded-[28px] overflow-hidden group border-white/5 relative cursor-pointer transition-shadow hover:shadow-[0_0_60px_rgba(34,211,238,0.2)]"
     >
-      <img
-        src={product.img}
-        alt={product.name}
-        className="absolute inset-0 w-full h-full object-cover opacity-15 group-hover:opacity-40 transition-all duration-1000 scale-105 group-hover:scale-100"
-      />
+      {product.img ? (
+        <img
+          src={product.img}
+          alt={product.name}
+          className="absolute inset-0 w-full h-full object-cover opacity-15 group-hover:opacity-40 transition-all duration-1000 scale-105 group-hover:scale-100"
+        />
+      ) : (
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_34%,rgba(59,130,246,0.24),transparent_42%),linear-gradient(135deg,rgba(34,211,238,0.12),transparent_45%,rgba(59,130,246,0.12))] opacity-80" />
+      )}
       <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-[#020617]/40 to-transparent"></div>
 
       <div className="absolute top-8 left-8 flex items-center gap-4" style={{ transform: "translateZ(40px)" }}>
