@@ -96,61 +96,115 @@ const ArcVionMarkVisual: React.FC = () => (
 );
 
 const ArchitectureFlowVisual: React.FC = () => {
-  const nodes = [
-    { label: "Base", x: "18%", y: "62%" },
-    { label: "Power", x: "38%", y: "32%" },
-    { label: "Compute", x: "58%", y: "60%" },
-    { label: "Payload", x: "80%", y: "32%" },
+  const modules = [
+    {
+      label: "Base",
+      detail: "Frame, mounting points, and shared mechanical interface",
+    },
+    {
+      label: "Power",
+      detail: "Battery, regulation, protection, and runtime monitoring",
+    },
+    {
+      label: "Compute",
+      detail: "Edge control, sensing logic, and onboard decisions",
+    },
+    {
+      label: "Payload",
+      detail: "Mission tools, sensors, cameras, and field modules",
+    },
   ];
 
   return (
     <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#030914] shadow-[0_24px_80px_rgba(0,0,0,0.32)]">
-      <div className="relative h-[360px] overflow-hidden">
+      <div className="relative min-h-[360px] overflow-hidden p-6">
         <div className="absolute inset-0 grid-pattern opacity-[0.05]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_62%_42%,rgba(52,211,153,0.14),transparent_52%)]" />
-        <svg className="absolute inset-0 h-full w-full" aria-hidden="true">
-          <defs>
-            <linearGradient id="flowLine" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#22d3ee" stopOpacity="0.15" />
-              <stop offset="50%" stopColor="#22d3ee" stopOpacity="0.8" />
-              <stop offset="100%" stopColor="#34d399" stopOpacity="0.15" />
-            </linearGradient>
-          </defs>
-          <path
-            d="M110 220 C220 80 330 80 440 220 S620 305 700 130"
-            fill="none"
-            stroke="rgba(34,211,238,0.16)"
-            strokeWidth="2"
-          />
-          <motion.path
-            d="M110 220 C220 80 330 80 440 220 S620 305 700 130"
-            fill="none"
-            stroke="url(#flowLine)"
-            strokeWidth="4"
-            strokeDasharray="80 260"
-            animate={{ strokeDashoffset: [260, -260] }}
-            transition={{ duration: 4.8, repeat: Infinity, ease: "linear" }}
-          />
-        </svg>
-        {nodes.map((node, i) => (
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(34,211,238,0.14),transparent_52%)]" />
+
+        <div className="relative z-10 grid min-h-[312px] gap-4 lg:grid-cols-[1fr_auto_1fr] lg:items-center">
+          <div className="grid gap-4">
+            {modules.slice(0, 2).map((module, i) => (
+              <motion.div
+                key={module.label}
+                className="rounded-2xl border border-cyan-400/15 bg-slate-950/85 p-5 shadow-[0_18px_50px_rgba(0,0,0,0.22)] backdrop-blur-xl"
+                animate={{ y: [0, -4, 0] }}
+                transition={{
+                  duration: 3.2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: i * 0.18,
+                }}
+              >
+                <div className="mb-4 flex items-center gap-3">
+                  <div className="h-2.5 w-2.5 rounded-full bg-cyan-300 shadow-[0_0_16px_rgba(34,211,238,0.75)]" />
+                  <p className="text-[11px] font-black uppercase tracking-[0.28em] text-white">
+                    {module.label}
+                  </p>
+                </div>
+                <p className="text-sm leading-relaxed text-slate-400">
+                  {module.detail}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="relative mx-auto flex h-full min-h-24 w-full items-center justify-center lg:w-32">
+            <div className="absolute left-1/2 top-0 hidden h-full w-px -translate-x-1/2 bg-cyan-400/15 lg:block" />
+            <div className="absolute left-0 right-0 top-1/2 h-px -translate-y-1/2 bg-cyan-400/15" />
+            <motion.div
+              className="relative flex h-28 w-28 items-center justify-center rounded-full border border-cyan-300/35 bg-cyan-400/10 text-center shadow-[0_0_50px_rgba(34,211,238,0.16)]"
+              animate={{ boxShadow: [
+                "0 0 32px rgba(34,211,238,0.12)",
+                "0 0 58px rgba(34,211,238,0.24)",
+                "0 0 32px rgba(34,211,238,0.12)",
+              ] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <div>
+                <div className="mx-auto mb-3 h-3 w-3 rounded-full bg-cyan-200 shadow-[0_0_18px_rgba(165,243,252,0.9)]" />
+                <p className="text-[10px] font-black uppercase tracking-[0.22em] text-cyan-100">
+                  Reusable
+                </p>
+                <p className="text-[10px] font-black uppercase tracking-[0.22em] text-cyan-100">
+                  Core
+                </p>
+              </div>
+            </motion.div>
+          </div>
+
+          <div className="grid gap-4">
+            {modules.slice(2).map((module, i) => (
+              <motion.div
+                key={module.label}
+                className="rounded-2xl border border-cyan-400/15 bg-slate-950/85 p-5 shadow-[0_18px_50px_rgba(0,0,0,0.22)] backdrop-blur-xl"
+                animate={{ y: [0, -4, 0] }}
+                transition={{
+                  duration: 3.2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: (i + 2) * 0.18,
+                }}
+              >
+                <div className="mb-4 flex items-center gap-3">
+                  <div className="h-2.5 w-2.5 rounded-full bg-emerald-300 shadow-[0_0_16px_rgba(52,211,153,0.75)]" />
+                  <p className="text-[11px] font-black uppercase tracking-[0.28em] text-white">
+                    {module.label}
+                  </p>
+                </div>
+                <p className="text-sm leading-relaxed text-slate-400">
+                  {module.detail}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+
           <motion.div
-            key={node.label}
-            className="absolute w-28 -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-cyan-400/15 bg-slate-950/85 p-4 text-center backdrop-blur-xl"
-            style={{ left: node.x, top: node.y }}
-            animate={{ y: [0, -6, 0] }}
-            transition={{
-              duration: 3.5,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: i * 0.2,
-            }}
+            className="pointer-events-none absolute left-[12%] right-[12%] top-1/2 hidden h-px -translate-y-1/2 bg-gradient-to-r from-transparent via-cyan-300 to-transparent lg:block"
+            animate={{ opacity: [0.28, 0.9, 0.28] }}
+            transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
           >
-            <div className="mx-auto mb-3 h-2 w-2 rounded-full bg-cyan-300 shadow-[0_0_16px_rgba(34,211,238,0.7)]" />
-            <p className="text-[10px] font-black uppercase tracking-[0.22em] text-white">
-              {node.label}
-            </p>
           </motion.div>
-        ))}
+        </div>
       </div>
       <div className="border-t border-cyan-400/10 bg-[#020617]/80 p-6">
         <p className="mb-2 text-[10px] font-black uppercase tracking-[0.32em] text-cyan-300">
