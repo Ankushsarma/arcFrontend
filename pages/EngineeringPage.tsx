@@ -367,19 +367,21 @@ const EngineeringPage: React.FC = () => {
             </div>
           </ScrollReveal>
 
-          <div className="mb-16 grid gap-4 md:grid-cols-4">
+          <div className="mb-16 grid items-stretch gap-4 md:grid-cols-4">
             {pipelineSteps.map((step, i) => {
               const Icon = step.icon;
               return (
                 <ScrollReveal key={step.label} delay={i * 0.06}>
-                  <div className="relative rounded-2xl border border-cyan-400/15 bg-cyan-400/[0.04] p-5">
-                    <Icon className="mb-5 text-cyan-300" size={22} />
-                    <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-500">
-                      {step.label}
-                    </p>
-                    <p className="mt-2 font-heading text-lg font-bold text-white">
-                      {step.value}
-                    </p>
+                  <div className="relative flex h-full min-h-[190px] flex-col rounded-2xl border border-cyan-400/15 bg-cyan-400/[0.04] p-5">
+                    <Icon className="mb-8 text-cyan-300" size={22} />
+                    <div className="mt-auto">
+                      <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-500">
+                        {step.label}
+                      </p>
+                      <p className="mt-2 font-heading text-lg font-bold leading-snug text-white">
+                        {step.value}
+                      </p>
+                    </div>
                     {i < pipelineSteps.length - 1 && (
                       <ArrowRight className="absolute -right-5 top-1/2 hidden -translate-y-1/2 text-cyan-400/50 md:block" />
                     )}
