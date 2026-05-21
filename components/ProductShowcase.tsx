@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
+import { motion, useAnimationFrame, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { ArrowUpRight, Wind, Zap, Camera, Layers, Truck } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -46,7 +46,7 @@ const products = [
   },
 ];
 
-const ProductCard: React.FC<{ product: typeof products[0] }> = ({ product }) => {
+const ProductCard: React.FC<{ product: typeof products[0]; isDragging?: boolean }> = ({ product, isDragging = false }) => {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -116,6 +116,9 @@ const ProductCard: React.FC<{ product: typeof products[0] }> = ({ product }) => 
           </p>
           <Link
             to={`/project/${product.id}`}
+            onClick={(event) => {
+              if (isDragging) event.preventDefault();
+            }}
             className="inline-flex items-center gap-2 text-[10px] font-bold text-slate-300 bg-white/5 border border-white/10 px-5 py-2 rounded-full hover:bg-cyan-500 hover:text-black hover:border-cyan-500 transition-all uppercase tracking-[0.1em]"
           >
             LEARN MORE
@@ -134,6 +137,78 @@ const ProductCard: React.FC<{ product: typeof products[0] }> = ({ product }) => 
 
 export const ProductShowcase: React.FC = () => {
   const list = [...products, ...products, ...products];
+  const trackRef = useRef<HTMLDivElement>(null);
+  const x = useMotionValue(0);
+  const [segmentWidth, setSegmentWidth] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const isPointerActive = useRef(false);
+  const dragReleaseTimeout = useRef<number | null>(null);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    const measure = () => {
+      const nextSegmentWidth = track.scrollWidth / 3;
+      setSegmentWidth(nextSegmentWidth);
+      x.set(-nextSegmentWidth);
+    };
+
+    measure();
+    const resizeObserver = new ResizeObserver(measure);
+    resizeObserver.observe(track);
+
+    return () => {
+      resizeObserver.disconnect();
+      if (dragReleaseTimeout.current) {
+        window.clearTimeout(dragReleaseTimeout.current);
+      }
+    };
+  }, [x]);
+
+  useAnimationFrame((_, delta) => {
+    if (!segmentWidth || isPointerActive.current) return;
+
+    const speed = 0.045;
+    const nextX = x.get() - delta * speed;
+
+    if (nextX <= -segmentWidth * 2) {
+      x.set(nextX + segmentWidth);
+      return;
+    }
+
+    if (nextX >= 0) {
+      x.set(nextX - segmentWidth);
+      return;
+    }
+
+    x.set(nextX);
+  });
+
+  const keepTrackLooped = () => {
+    if (!segmentWidth) return;
+
+    let nextX = x.get();
+    while (nextX <= -segmentWidth * 2) nextX += segmentWidth;
+    while (nextX >= 0) nextX -= segmentWidth;
+    x.set(nextX);
+  };
+
+  const handleDragStart = () => {
+    isPointerActive.current = true;
+    setIsDragging(true);
+    if (dragReleaseTimeout.current) {
+      window.clearTimeout(dragReleaseTimeout.current);
+    }
+  };
+
+  const handleDragEnd = () => {
+    isPointerActive.current = false;
+    keepTrackLooped();
+    dragReleaseTimeout.current = window.setTimeout(() => {
+      setIsDragging(false);
+    }, 180);
+  };
 
   return (
     <section className="py-24 relative bg-transparent overflow-hidden">
@@ -164,17 +239,21 @@ export const ProductShowcase: React.FC = () => {
 
       <div className="relative py-12 overflow-hidden">
         <motion.div
-          className="flex w-max gap-8 sm:gap-12"
-          animate={{ x: ["0%", "-33.333333%"] }}
-          transition={{
-            duration: 34,
-            ease: "linear",
-            repeat: Infinity,
+          ref={trackRef}
+          className="flex w-max gap-8 sm:gap-12 cursor-grab active:cursor-grabbing touch-pan-y select-none"
+          drag="x"
+          dragConstraints={{
+            left: segmentWidth ? -segmentWidth * 2 : 0,
+            right: 0,
           }}
-          style={{ willChange: "transform" }}
+          dragElastic={0.04}
+          dragMomentum
+          onDragStart={handleDragStart}
+          onDragEnd={handleDragEnd}
+          style={{ x, willChange: "transform" }}
         >
           {list.map((p, i) => (
-            <ProductCard key={i} product={p} />
+            <ProductCard key={i} product={p} isDragging={isDragging} />
           ))}
         </motion.div>
       </div>
