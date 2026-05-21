@@ -15,7 +15,7 @@ const ProjectPage: React.FC = () => {
       <PageTransition>
         <div className="min-h-screen flex flex-col items-center justify-center bg-[#020617] text-white">
           <h1 className="text-4xl font-bold mb-4 uppercase tracking-tighter">
-            Project Not Found
+            Product Not Found
           </h1>
           <Link to="/" className="text-cyan-400 hover:underline">
             Back to Fleet
@@ -175,7 +175,7 @@ const ProjectPage: React.FC = () => {
                   to={
                     status === "coming-soon"
                       ? "/coming-soon/arise"
-                      : `/project/${project.id}/full-details`
+                      : `/product/${project.id}/full-details`
                   }
                   className={`flex items-center justify-center gap-3 rounded-2xl border ${style.border} bg-white/[0.04] px-6 py-4 text-sm font-bold uppercase tracking-[0.18em] ${style.text} transition-all hover:bg-white/[0.08] hover:text-white`}
                 >
@@ -237,7 +237,7 @@ const ProjectPage: React.FC = () => {
           <ScrollReveal>
             <div>
               <h2 className="text-3xl font-black uppercase tracking-tighter mb-8 bg-gradient-to-r from-white to-slate-500 bg-clip-text text-transparent">
-                Project Overview
+                Product Overview
               </h2>
               <p className="text-slate-400 leading-relaxed text-lg font-light mb-8 italic border-l-2 border-cyan-500/20 pl-8">
                 {fullDesc}
@@ -313,7 +313,7 @@ const ProjectPage: React.FC = () => {
                 </h2>
               </div>
               <p className="max-w-lg text-sm leading-relaxed text-slate-500">
-                These visuals use the provided project assets and keep each
+                These visuals use the provided product assets and keep each
                 platform page grounded in the actual ArcVion hardware direction.
               </p>
             </div>

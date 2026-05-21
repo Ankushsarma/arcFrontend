@@ -22,7 +22,7 @@ export const Ecosystems: React.FC = () => {
       icon: <Wind size={24} />,
       color: 'from-emerald-500 to-teal-600',
       image: '/project-photos/image3.png',
-      path: '/project/zarvex',
+      path: '/product/zarvex',
     },
     {
       id: 'identity',
@@ -31,7 +31,7 @@ export const Ecosystems: React.FC = () => {
       icon: <Anchor size={24} />,
       color: 'from-purple-500 to-pink-600',
       image: '/project-photos/image2.png',
-      path: '/project/aegis',
+      path: '/product/aegis',
     }
   ];
 

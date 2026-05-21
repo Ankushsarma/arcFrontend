@@ -34,7 +34,7 @@ const ProjectDetailsRequestPage: React.FC = () => {
         <div className="relative z-10 mx-auto grid max-w-7xl gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
           <div>
             <Link
-              to={`/project/${project.id}`}
+              to={`/product/${project.id}`}
               className="mb-10 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-slate-500 transition-colors hover:text-white"
             >
               <ArrowLeft size={14} /> Back to {project.name}

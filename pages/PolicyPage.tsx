@@ -51,7 +51,7 @@ const policies: Record<
       {
         title: "How we use information",
         body:
-          "We use submitted information to respond to inquiries, maintain business communication, review project requests, and improve website reliability.",
+          "We use submitted information to respond to inquiries, maintain business communication, review product requests, and improve website reliability.",
       },
       {
         title: "Third-party services",
@@ -74,7 +74,7 @@ const policies: Record<
       {
         title: "Website content",
         body:
-          "Information on this website is provided for general informational purposes. Product descriptions, technical details, and project information may change as development continues.",
+          "Information on this website is provided for general informational purposes. Product descriptions, technical details, and product information may change as development continues.",
       },
       {
         title: "Intellectual property",

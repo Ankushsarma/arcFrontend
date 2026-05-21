@@ -52,6 +52,11 @@ const App: React.FC = () => {
               <Route path="/ecosystems/prana" element={<PranaPage />} />
               <Route path="/ecosystems/morph" element={<MorphPage />} />
               <Route
+                path="/product/:id/full-details"
+                element={<ProjectDetailsRequestPage />}
+              />
+              <Route path="/product/:id" element={<ProjectPage />} />
+              <Route
                 path="/project/:id/full-details"
                 element={<ProjectDetailsRequestPage />}
               />

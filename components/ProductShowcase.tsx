@@ -115,7 +115,7 @@ const ProductCard: React.FC<{ product: typeof products[0]; isDragging?: boolean 
             {product.status}
           </p>
           <Link
-            to={`/project/${product.id}`}
+            to={`/product/${product.id}`}
             onClick={(event) => {
               if (isDragging) event.preventDefault();
             }}

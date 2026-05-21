@@ -8,25 +8,25 @@ const companyLogo = "/logo/company_logo.jpeg";
 const ecosystemItems = [
   {
     name: "ZARVEX",
-    path: "/project/zarvex",
+    path: "/product/zarvex",
     subtitle: "Aerial Intelligence",
     color: "text-emerald-400",
   },
   {
     name: "AEGIS",
-    path: "/project/aegis",
+    path: "/product/aegis",
     subtitle: "Identity System",
     color: "text-blue-400",
   },
   {
     name: "UNIMOUNT",
-    path: "/project/unimount",
+    path: "/product/unimount",
     subtitle: "Universal Sensing",
     color: "text-amber-400",
   },
   {
     name: "ARISE",
-    path: "/project/arise",
+    path: "/product/arise",
     subtitle: "Coming Soon",
     color: "text-cyan-400",
   },

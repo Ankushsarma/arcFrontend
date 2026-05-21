@@ -292,7 +292,7 @@ const EngineeringPage: React.FC = () => {
                     Discuss Deployment <ArrowRight size={18} />
                   </Link>
                   <Link
-                    to="/project/aegis"
+                    to="/product/aegis"
                     className="inline-flex items-center justify-center gap-3 rounded-2xl border border-white/15 bg-white/5 px-8 py-4 text-sm font-black uppercase tracking-wider text-white transition-all hover:border-cyan-400/40 hover:bg-cyan-400/10"
                   >
                     View AEGIS
