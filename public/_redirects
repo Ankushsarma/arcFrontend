@@ -1,3 +1,4 @@
+/favicon/faico-app-icon.png    /favicon/faico-app-icon.png   200
 /favicon/faico.jpeg    /favicon/faico.jpeg   200
 /favicon/faico-transparent.png    /favicon/faico-transparent.png   200
 /favicon/*    /favicon/:splat   200
