@@ -1,1 +1,7 @@
+/favicon/faico.jpeg    /favicon/faico.jpeg   200
+/favicon/*    /favicon/:splat   200
+/favicon.ico    /favicon.ico   200
+/favicon.png    /favicon.png   200
+/site.webmanifest    /site.webmanifest   200
+/logo/*    /logo/:splat   200
 /*    /index.html   200
