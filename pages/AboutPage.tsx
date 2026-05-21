@@ -72,7 +72,7 @@ const AboutPage: React.FC = () => {
     },
     {
       name: "Ritam Pandey",
-      role: "Founder",
+      role: "Co-Founder",
       focus: "COO - Chief Operating Officer",
       color: "from-blue-400 to-emerald-500",
       image: "/team/ritam.jpg",
