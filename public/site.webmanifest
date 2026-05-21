@@ -1,0 +1,21 @@
+{
+  "name": "ArcVion",
+  "short_name": "ArcVion",
+  "description": "Modular robotics infrastructure for aerial systems, intelligent attendance, universal sensing, and field-ready automation platforms.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#020617",
+  "icons": [
+    {
+      "src": "/logo/site-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/logo/site-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
