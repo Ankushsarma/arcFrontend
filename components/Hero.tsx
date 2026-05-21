@@ -223,7 +223,7 @@ export const Hero: React.FC<HeroProps> = ({ scrollY }) => {
 
       <motion.div
         style={{ y: textY }}
-        className="relative z-10 w-full max-w-7xl px-6 text-center"
+        className="relative z-30 w-full max-w-7xl px-6 text-center"
       >
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -275,7 +275,7 @@ export const Hero: React.FC<HeroProps> = ({ scrollY }) => {
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.9 }}
-          className="mx-auto mt-12 grid max-w-4xl gap-3 border-y border-white/10 py-4 text-left sm:grid-cols-3"
+          className="mx-auto mt-12 grid max-w-4xl gap-3 border-y border-cyan-300/20 bg-slate-950/35 py-4 text-left shadow-[0_0_45px_rgba(34,211,238,0.08)] backdrop-blur-sm sm:grid-cols-3"
         >
           {[
             ["01", "Modular robotics"],
@@ -284,12 +284,12 @@ export const Hero: React.FC<HeroProps> = ({ scrollY }) => {
           ].map(([index, label]) => (
             <div
               key={label}
-              className="flex items-center gap-4 rounded-xl bg-white/[0.025] px-4 py-3"
+              className="flex items-center gap-4 rounded-xl border border-white/10 bg-white/[0.06] px-4 py-3 shadow-[0_10px_30px_rgba(0,0,0,0.22)]"
             >
-              <span className="font-mono text-[10px] font-black text-cyan-300">
+              <span className="font-mono text-[10px] font-black text-cyan-300 drop-shadow-[0_0_10px_rgba(34,211,238,0.45)]">
                 {index}
               </span>
-              <span className="text-xs font-bold uppercase tracking-[0.18em] text-slate-300">
+              <span className="text-xs font-black uppercase tracking-[0.18em] text-slate-100">
                 {label}
               </span>
             </div>
@@ -298,15 +298,15 @@ export const Hero: React.FC<HeroProps> = ({ scrollY }) => {
       </motion.div>
 
       <motion.div
-        className="absolute bottom-[60px] left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 opacity-80 cursor-pointer group"
+        className="absolute bottom-[60px] left-1/2 z-30 -translate-x-1/2 flex cursor-pointer flex-col items-center gap-3 opacity-90 group"
         initial={{ opacity: 0 }}
-        animate={{ opacity: 0.8 }}
+        animate={{ opacity: 0.9 }}
         transition={{ delay: 2.2 }}
       >
-        <span className="text-[10px] tracking-[0.5em] font-black text-cyan-400 uppercase group-hover:text-white transition-colors">
+        <span className="text-[10px] tracking-[0.5em] font-black text-cyan-200 uppercase drop-shadow-[0_0_14px_rgba(34,211,238,0.55)] transition-colors group-hover:text-white">
           Scroll to deploy
         </span>
-        <div className="w-6 h-10 border-2 border-cyan-400/50 rounded-full p-1 flex justify-center shadow-[0_0_10px_rgba(34,211,238,0.2)]">
+        <div className="flex h-10 w-6 justify-center rounded-full border-2 border-cyan-300/80 bg-cyan-300/10 p-1 shadow-[0_0_18px_rgba(34,211,238,0.35)]">
           <motion.div
             animate={{ y: [0, 16, 0] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
