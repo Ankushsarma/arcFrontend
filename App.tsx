@@ -17,10 +17,22 @@ import PolicyPage from "./pages/PolicyPage.tsx";
 
 /* Scroll to top on route change */
 const ScrollToTop: React.FC = () => {
-  const { pathname } = useLocation();
+  const { hash, pathname } = useLocation();
+
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    window.requestAnimationFrame(() => {
+      if (hash) {
+        const target = document.querySelector(hash);
+        if (target) {
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+          return;
+        }
+      }
+
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    });
+  }, [hash, pathname]);
+
   return null;
 };
 

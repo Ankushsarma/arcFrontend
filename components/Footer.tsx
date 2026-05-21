@@ -15,12 +15,23 @@ const registrationAddress =
   "NO:33, 2ND MAIN WEST ROAD, SIDDARAMESWARA BADAVANE, BATAWADI, TUMKUR, KARNATAKA 572102.";
 
 export const Footer: React.FC = () => {
+  const handleLogoClick = () => {
+    window.requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    });
+  };
+
   return (
     <footer className="py-20 border-t border-white/5 bg-slate-950">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid md:grid-cols-4 gap-12 mb-16">
           <div className="col-span-2">
-            <Link to="/" className="inline-flex items-center mb-6 group">
+            <Link
+              to="/"
+              onClick={handleLogoClick}
+              aria-label="Go to ArcVion home page"
+              className="inline-flex items-center mb-6 group"
+            >
               <img
                 src={companyLogo}
                 alt="ArcVion"

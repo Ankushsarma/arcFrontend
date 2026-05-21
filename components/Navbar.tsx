@@ -59,11 +59,16 @@ const itemVariants = {
   visible: { opacity: 1, x: 0 },
 };
 
-const DesktopContactSection: React.FC = () => {
+type ContactSectionProps = {
+  onNavigate: () => void;
+};
+
+const DesktopContactSection: React.FC<ContactSectionProps> = ({ onNavigate }) => {
   return (
     <div className="hidden md:flex items-center">
       <Link
         to="/contact"
+        onClick={onNavigate}
         className="px-6 py-2.5 text-sm font-bold bg-white text-black rounded-full hover:bg-cyan-400 transition-all flex items-center gap-2 energy-pulse"
       >
         BUILD NOW <ChevronRight size={16} />
@@ -72,10 +77,11 @@ const DesktopContactSection: React.FC = () => {
   );
 };
 
-const MobileContactSection: React.FC = () => {
+const MobileContactSection: React.FC<ContactSectionProps> = ({ onNavigate }) => {
   return (
     <Link
       to="/contact"
+      onClick={onNavigate}
       className="w-full py-4 bg-white text-black font-bold rounded-xl mt-2 block text-center"
     >
       BUILD NOW
@@ -104,6 +110,47 @@ export const Navbar: React.FC = () => {
     dropdownTimeout.current = setTimeout(() => setIsDropdownOpen(false), 150);
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  };
+
+  const scrollToHash = (hash: string) => {
+    const target = document.querySelector(hash);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+
+    scrollToTop();
+  };
+
+  const closeMenus = () => {
+    setIsMobileMenuOpen(false);
+    setIsDropdownOpen(false);
+    setIsMobileEcoOpen(false);
+  };
+
+  const handleLogoClick = () => {
+    closeMenus();
+    window.requestAnimationFrame(scrollToTop);
+  };
+
+  const handleNavClick = (href: string) => {
+    closeMenus();
+
+    const [targetPath, hash] = href.split("#");
+    const destinationPath = targetPath || location.pathname;
+
+    if (hash) {
+      window.setTimeout(() => scrollToHash(`#${hash}`), 0);
+      return;
+    }
+
+    if (destinationPath === location.pathname) {
+      window.requestAnimationFrame(scrollToTop);
+    }
+  };
+
   const navItems = [
     { label: "Platforms", href: "/#platforms" },
     { label: "Ecosystems", href: "#", hasDropdown: true },
@@ -123,7 +170,12 @@ export const Navbar: React.FC = () => {
           className="glass rounded-2xl flex items-center justify-between border-white/10 px-6 py-3 shadow-[0_20px_50px_rgba(0,0,0,0.38)]"
         >
           {/* Logo */}
-          <Link to="/" className="group flex items-center cursor-pointer">
+          <Link
+            to="/"
+            onClick={handleLogoClick}
+            aria-label="Go to ArcVion home page"
+            className="group flex items-center cursor-pointer"
+          >
             <img
               src={companyLogo}
               alt="ArcVion"
@@ -178,6 +230,7 @@ export const Navbar: React.FC = () => {
                             <motion.div key={eco.name} variants={itemVariants}>
                               <Link
                                 to={eco.path}
+                                onClick={() => handleNavClick(eco.path)}
                                 className="flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-300 group/item hover:bg-white/[0.06] relative overflow-hidden"
                               >
                                 {/* Hover glow */}
@@ -215,6 +268,7 @@ export const Navbar: React.FC = () => {
                 <Link
                   key={item.label}
                   to={item.href}
+                  onClick={() => handleNavClick(item.href)}
                   className="text-slate-400 hover:text-white transition-colors relative group"
                 >
                   {item.label}
@@ -228,7 +282,7 @@ export const Navbar: React.FC = () => {
           </div>
 
           {/* Desktop CTA */}
-          <DesktopContactSection />
+          <DesktopContactSection onNavigate={() => handleNavClick("/contact")} />
 
           {/* Mobile hamburger */}
           <button
@@ -274,6 +328,7 @@ export const Navbar: React.FC = () => {
                           <Link
                             key={eco.name}
                             to={eco.path}
+                            onClick={() => handleNavClick(eco.path)}
                             className={`text-sm font-bold tracking-wider ${eco.color} hover:text-white transition-colors py-1`}
                           >
                             {eco.name}
@@ -290,13 +345,14 @@ export const Navbar: React.FC = () => {
                 <Link
                   key={item.label}
                   to={item.href}
+                  onClick={() => handleNavClick(item.href)}
                   className="text-lg font-heading text-white"
                 >
                   {item.label}
                 </Link>
               ),
             )}
-            <MobileContactSection />
+            <MobileContactSection onNavigate={() => handleNavClick("/contact")} />
           </motion.div>
         )}
       </AnimatePresence>
