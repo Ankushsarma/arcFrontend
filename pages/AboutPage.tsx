@@ -12,15 +12,17 @@ import {
 import { Link } from "react-router-dom";
 import { PageTransition } from "../components/PageTransition.tsx";
 
-const ScrollReveal: React.FC<{ children: React.ReactNode; delay?: number }> = ({
-  children,
-  delay = 0,
-}) => (
+const ScrollReveal: React.FC<{
+  children: React.ReactNode;
+  delay?: number;
+  className?: string;
+}> = ({ children, delay = 0, className }) => (
   <motion.div
     initial={{ opacity: 0, y: 30 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, margin: "-100px" }}
     transition={{ duration: 0.8, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
+    className={className}
   >
     {children}
   </motion.div>
@@ -93,6 +95,13 @@ const AboutPage: React.FC = () => {
       color: "from-purple-400 to-cyan-500",
       image: "/team/shivam.jpg",
       linkedin: "https://www.linkedin.com/in/shivam-yadav-280229277",
+    },
+    {
+      name: "Dr. Ravi P Dwivedi",
+      role: "Advisor",
+      focus: "Mentor",
+      color: "from-amber-300 to-cyan-500",
+      image: "/team/sir.jpg",
     },
   ];
 
@@ -175,8 +184,8 @@ const AboutPage: React.FC = () => {
                   <span className="text-white font-semibold">Pawan Kalyan</span>{" "}
                   and{" "}
                   <span className="text-white font-semibold">Shivam Yadav</span>
-                  , ArcVion operates with a clear vision: solving the rigidity
-                  of modern hardware.
+                  , with guidance from our faculty mentor, ArcVion operates
+                  with a clear vision: solving the rigidity of modern hardware.
                 </p>
                 <div className="p-6 rounded-2xl glass border-l-4 border-cyan-500 bg-white/5 italic text-slate-300">
                   "Modern industries face a fundamental challenge — systems are
@@ -258,14 +267,14 @@ const AboutPage: React.FC = () => {
               </div>
             </ScrollReveal>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 items-stretch justify-items-center gap-8 sm:grid-cols-2 lg:grid-cols-5 lg:gap-5 xl:gap-6">
               {founders.map((person, i) => (
-                <ScrollReveal key={i} delay={i * 0.1}>
-                  <div className="group relative h-full">
+                <ScrollReveal key={i} delay={i * 0.1} className="h-full w-full">
+                  <div className="group relative h-full w-full max-w-[15rem] lg:max-w-none">
                     <div
                       className={`absolute -inset-px rounded-[2rem] bg-gradient-to-br ${person.color} opacity-20 blur-sm transition-opacity duration-500 group-hover:opacity-55`}
                     ></div>
-                    <div className="relative flex min-h-[410px] flex-col overflow-hidden rounded-[2rem] border border-white/10 bg-[#071120]/85 p-7 text-center shadow-[0_28px_80px_rgba(0,0,0,0.24)] transition-all duration-300 group-hover:-translate-y-1 group-hover:border-cyan-400/35">
+                    <div className="relative mx-auto flex h-full min-h-[430px] w-full flex-col items-center overflow-hidden rounded-[2rem] border border-white/10 bg-[#071120]/85 p-6 text-center shadow-[0_28px_80px_rgba(0,0,0,0.24)] transition-all duration-300 group-hover:-translate-y-1 group-hover:border-cyan-400/35 xl:p-7">
                       <div className="absolute inset-0 grid-pattern opacity-[0.04]" />
                       <div
                         className={`absolute inset-x-0 top-0 h-28 bg-gradient-to-b ${person.color} opacity-10`}
@@ -276,29 +285,38 @@ const AboutPage: React.FC = () => {
                         image={person.image}
                         gradient={person.color}
                       />
-                      <h4 className="relative text-2xl font-bold text-white mb-2">
+                      <h4 className="relative mb-2 flex min-h-[3.5rem] items-center justify-center text-center text-xl font-bold leading-tight text-white xl:text-2xl">
                         {person.name}
                       </h4>
-                      <p className="relative mx-auto mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-cyan-300">
-                        <Sparkles size={12} />
+                      <p className="relative mx-auto mb-4 inline-flex min-h-[2rem] max-w-full items-center justify-center gap-1.5 whitespace-nowrap rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-center text-[9px] font-bold uppercase tracking-[0.12em] text-cyan-300 xl:text-[10px] xl:tracking-[0.14em]">
+                        <Sparkles size={12} className="shrink-0" />
                         {person.role}
                       </p>
-                      <p className="relative mx-auto mb-7 max-w-[15rem] text-sm leading-relaxed text-slate-400">
+                      <p className="relative mx-auto mb-7 flex min-h-[3.75rem] max-w-[11rem] items-start justify-center text-center text-sm leading-relaxed text-slate-400">
                         {person.focus}
                       </p>
-                      <a
-                        href={person.linkedin}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`${person.name} LinkedIn profile`}
-                        className="relative mx-auto mt-auto inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.06] px-5 py-2.5 text-slate-300 transition-all hover:border-cyan-400/45 hover:bg-cyan-400/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-cyan-400/50"
-                      >
-                        <Linkedin size={16} />
-                        <span className="text-[10px] font-bold uppercase tracking-[0.18em]">
-                          LinkedIn
-                        </span>
-                        <ArrowRight size={14} className="-rotate-45" />
-                      </a>
+                      {person.linkedin ? (
+                        <a
+                          href={person.linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${person.name} LinkedIn profile`}
+                          className="relative mx-auto mt-auto inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.06] px-4 py-2.5 text-slate-300 transition-all hover:border-cyan-400/45 hover:bg-cyan-400/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-cyan-400/50 xl:gap-3 xl:px-5"
+                        >
+                          <Linkedin size={16} />
+                          <span className="text-[10px] font-bold uppercase tracking-[0.18em]">
+                            LinkedIn
+                          </span>
+                          <ArrowRight size={14} className="-rotate-45" />
+                        </a>
+                      ) : (
+                        <div className="relative mx-auto mt-auto inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2.5 text-slate-500 xl:gap-3 xl:px-5">
+                          <Linkedin size={16} />
+                          <span className="text-[10px] font-bold uppercase tracking-[0.18em]">
+                            Profile Soon
+                          </span>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </ScrollReveal>

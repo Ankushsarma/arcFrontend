@@ -46,6 +46,7 @@ export const Footer: React.FC = () => {
               <p>LEGAL NAME: ARCVION</p>
               <p>FOUNDED BY: SAI MITHIL K • RITAM PANDEY</p>
               <p>CORE TEAM: SHIVAM YADAV • PAWAN KALYAN</p>
+              <p>ADVISORY: DR. RAVI PRAKASH DWIVEDI</p>
             </div>
             <div className="flex gap-4">
               {[
