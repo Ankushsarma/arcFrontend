@@ -16,7 +16,7 @@ export const AILayer: React.FC = () => {
           <div className="p-3 bg-white/5 rounded-2xl mb-6 border border-white/10">
             <BrainCircuit className="text-cyan-400 w-8 h-8" />
           </div>
-          <h2 className="text-4xl md:text-6xl font-bold font-heading mb-6">INTELLIGENT BY DEFAULT.</h2>
+          <h2 className="text-4xl md:text-6xl font-bold font-heading mb-6">INTELLIGENT BY DEFAULT</h2>
           <p className="text-slate-400 text-lg max-w-2xl">
             AI isn't the hero—it's the glue. Our firmware layer automatically recognizes new modules, optimizes power distribution, and handles low-level pathing without manual input.
           </p>

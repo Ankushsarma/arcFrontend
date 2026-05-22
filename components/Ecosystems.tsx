@@ -39,7 +39,7 @@ export const Ecosystems: React.FC = () => {
     <section id="ecosystems" className="py-32 bg-slate-950/50">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-bold font-heading mb-4">THREE ECOSYSTEMS.</h2>
+          <h2 className="text-4xl md:text-5xl font-bold font-heading mb-4">THREE ECOSYSTEMS</h2>
           <p className="text-slate-400 text-lg">One unified hardware architecture.</p>
         </div>
 

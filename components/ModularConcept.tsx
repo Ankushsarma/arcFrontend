@@ -26,7 +26,7 @@ export const ModularConcept: React.FC = () => {
               </div>
               <h2 className="text-4xl md:text-6xl font-bold font-heading mb-7 leading-[0.92] tracking-tight">
                 MODULARITY <span className="text-slate-600">IS</span><br />
-                <span className="text-cyan-400 italic">THE STANDARD.</span>
+                <span className="text-cyan-400 italic">THE STANDARD</span>
               </h2>
               <p className="text-slate-300 text-lg mb-10 max-w-2xl leading-relaxed">
                 Shared infrastructure for rapid mission deployment. Stop rebuilding hardware, start hot-swapping intelligence.

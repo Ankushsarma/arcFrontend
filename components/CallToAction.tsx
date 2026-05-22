@@ -22,8 +22,8 @@ export const CallToAction: React.FC = () => {
           >
             <Zap className="mx-auto text-cyan-400 mb-8 w-12 h-12" />
             <h2 className="text-5xl md:text-7xl font-bold font-heading mb-8 tracking-tight">
-              STOP REBUILDING.<br />
-              <span className="text-cyan-400">START REUSING.</span>
+              STOP REBUILDING<br />
+              <span className="text-cyan-400">START REUSING</span>
             </h2>
             <p className="text-slate-400 text-lg md:text-xl mb-12 max-w-2xl mx-auto leading-relaxed">
               The modular future is ready for deployment. Partner with ArcVion to redefine your robotic fleet with unparalleled flexibility and intelligence.

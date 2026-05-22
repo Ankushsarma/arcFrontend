@@ -219,7 +219,7 @@ export const ProductShowcase: React.FC = () => {
             Foundation Infrastructure
           </div>
           <h2 className="text-4xl md:text-7xl font-black tracking-tighter mb-3 uppercase">
-            HARDWARE <span className="text-cyan-400 italic">FABRIC.</span>
+            HARDWARE <span className="text-cyan-400 italic">FABRIC</span>
           </h2>
           <p className="text-slate-500 text-sm max-w-md font-light leading-relaxed">
             The core kinetic layer of the ArcVion ecosystem. Unified, modular, and built for extreme mission persistence.

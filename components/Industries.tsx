@@ -65,7 +65,7 @@ export const Industries: React.FC = () => {
             <RadioTower size={13} /> Deployment Domains
           </div>
           <h2 className="font-heading text-4xl font-black uppercase tracking-tight md:text-6xl">
-            BUILT FOR <span className="text-cyan-400">IMPACT.</span>
+            BUILT FOR <span className="text-cyan-400">IMPACT</span>
           </h2>
           <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-slate-400">
             ArcVion platforms are designed as reusable infrastructure: one

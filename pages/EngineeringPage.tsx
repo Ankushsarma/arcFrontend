@@ -275,7 +275,7 @@ const EngineeringPage: React.FC = () => {
                 <h1 className="font-heading text-6xl font-black uppercase leading-[0.9] tracking-tighter md:text-8xl">
                   Built To Solve
                   <span className="block animate-gradient-text italic">
-                    Real Problems.
+                    Real Problems
                   </span>
                 </h1>
                 <p className="mt-8 max-w-2xl text-lg leading-relaxed text-slate-400 md:text-xl">
@@ -319,7 +319,7 @@ const EngineeringPage: React.FC = () => {
                     Core Engineering Philosophy
                   </p>
                   <h2 className="mt-4 font-heading text-4xl font-black uppercase tracking-tighter md:text-6xl">
-                    Three Pillars.
+                    Three Pillars
                   </h2>
                 </div>
                 <p className="max-w-xl text-sm leading-relaxed text-slate-500">
@@ -362,7 +362,7 @@ const EngineeringPage: React.FC = () => {
                 How We Frame Each Problem Into A System
               </p>
               <h2 className="mt-4 font-heading text-4xl font-black uppercase tracking-tighter md:text-6xl">
-                Problem To Platform.
+                Problem To Platform
               </h2>
             </div>
           </ScrollReveal>
@@ -442,7 +442,7 @@ const EngineeringPage: React.FC = () => {
                   </p>
                   <h2 className="mt-4 font-heading text-5xl font-black uppercase tracking-tighter md:text-7xl">
                     Standalone AI
-                    <span className="block text-emerald-300">Attendance.</span>
+                    <span className="block text-emerald-300">Attendance</span>
                   </h2>
                 </div>
                 <span className="w-fit rounded-full border border-emerald-400/25 bg-emerald-400/10 px-5 py-2 text-sm font-bold text-emerald-300">
